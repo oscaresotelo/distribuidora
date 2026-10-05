@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minerva Capilar - Cosmética Profesional</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        minerva: {
+                            dark: '#1c0729',      /* Deepest purple */
+                            violet: '#2d0b3f',    /* Primary Minerva Violet */
+                            fuchsia: '#8b1e84',   /* Accent Magenta/Violet */
+                            pink: '#e20074',      /* Electric Pink / Highlights */
+                            lightPink: '#fdfbfd', /* Soft background tint */
+                            cardBg: '#faf8fc',    /* Soft product card bg */
+                            grayText: '#555555'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
+            color: #222222;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(45, 11, 63, 0.96);
+            backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #8b1e84;
+            border-radius: 10px;
+        }
+        .product-card:hover .product-img {
+            transform: scale(1.06);
+        }
+        .product-card:hover .quick-view-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+        .pulse-badge {
+            animation: subtlePulse 2.5s infinite;
+        }
+        /* Carousel Touch Utility */
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased overflow-x-hidden custom-scrollbar">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-minerva-dark text-white text-xs py-2.5 px-4 font-medium tracking-wide border-b border-minerva-fuchsia/30">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
+            <div class="flex items-center gap-2">
+                <span class="bg-minerva-pink text-white text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full">ENVÍOS GRATIS</span>
+                <span>En compras mayores a <strong>$45.000</strong> a todo el país 🇦🇷</span>
+            </div>
+            <div class="flex items-center gap-6 text-gray-300">
+                <span class="hidden sm:inline"><i class="fa-solid fa-truck-fast text-minerva-pink mr-1"></i> Despacho directo de fábrica</span>
+                <button onclick="openWholesaleModal()" class="text-xs font-bold text-pink-300 hover:text-white transition flex items-center gap-1">
+                    <i class="fa-solid fa-store"></i> VENTA MAYORISTA / SALONES
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header & Main Navigation -->
+    <header class="sticky top-0 z-40 glass-nav text-white shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
+            
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-white hover:text-minerva-pink transition focus:outline-none" aria-label="Abrir Menú">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-minerva-pink to-minerva-fuchsia flex items-center justify-center text-white shadow-lg shadow-minerva-pink/20 group-hover:scale-105 transition duration-300">
+                    <i class="fa-solid fa-crown text-xl"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading text-2xl font-black tracking-wider text-white leading-none">
+                        MINERVA<span class="text-minerva-pink font-light">CAPILAR</span>
+                    </span>
+                    <span class="text-[9px] uppercase tracking-[0.25em] text-pink-200 font-semibold mt-0.5">Cosmética Profesional</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Desktop) -->
+            <div class="hidden md:flex flex-1 max-w-md relative mx-4">
+                <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Buscar en Minerva: shampoo, máscara, ampolla..." 
+                    class="w-full bg-white/10 text-white placeholder-gray-300 text-sm rounded-full pl-4 pr-10 py-2.5 border border-white/20 focus:outline-none focus:bg-white focus:text-gray-900 focus:placeholder-gray-400 focus:border-minerva-pink transition-all shadow-inner">
+                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 hover:text-minerva-pink">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <div id="searchResults" class="hidden absolute top-full left-0 right-0 mt-2 bg-white text-gray-900 rounded-xl shadow-2xl overflow-hidden z-50 border border-gray-100 max-h-80 overflow-y-auto"></div>
+            </div>
+
+            <!-- Action Icons -->
+            <div class="flex items-center gap-4 sm:gap-6">
+                <a href="https://wa.me/5491112345678" target="_blank" class="hidden sm:flex items-center gap-2 text-xs font-semibold hover:text-pink-300 transition">
+                    <div class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </div>
+                    <span class="hidden lg:inline">Asesoramiento</span>
+                </a>
+
+                <button onclick="openWholesaleModal()" class="sm:hidden text-xs bg-minerva-pink text-white px-2.5 py-1.5 rounded-md font-bold">
+                    Mayorista
+                </button>
+
+                <button onclick="toggleCartDrawer()" class="relative text-white hover:text-minerva-pink transition focus:outline-none flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full border border-white/15 hover:border-minerva-pink">
+                    <i class="fa-solid fa-bag-shopping text-xl text-pink-300"></i>
+                    <span id="cartCount" class="bg-minerva-pink text-white text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+                    <span id="cartTotalHeader" class="hidden lg:inline text-xs font-semibold pl-1 border-l border-white/20">$0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Bar (Desktop) -->
+        <nav class="hidden lg:block border-t border-white/10 bg-minerva-dark/60">
+            <div class="max-w-7xl mx-auto px-6">
+                <ul class="flex items-center justify-between text-sm font-medium">
+                    <li><button onclick="filterCategory('all')" class="py-3 px-4 hover:text-pink-300 transition block">Inicio</button></li>
+                    <li><button onclick="filterCategory('Shampoo')" class="py-3 px-4 hover:text-pink-300 transition block">Shampoos</button></li>
+                    <li><button onclick="filterCategory('Acondicionador')" class="py-3 px-4 hover:text-pink-300 transition block">Acondicionadores</button></li>
+                    <li><button onclick="filterCategory('Tratamiento')" class="py-3 px-4 hover:text-pink-300 transition block">Máscaras & Baños de Crema</button></li>
+                    <li><button onclick="filterCategory('Ampolla')" class="py-3 px-4 hover:text-pink-300 transition block">Ampollas & Serums</button></li>
+                    <li><button onclick="filterCategory('Kit')" class="py-3 px-4 hover:text-pink-300 transition block">Kits de Tratamiento</button></li>
+                    <li><button onclick="openWholesaleModal()" class="py-3 px-4 text-pink-300 hover:text-white font-bold transition flex items-center gap-1.5"><i class="fa-solid fa-percent text-xs"></i> Precios Salones</button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Slide Drawer Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex">
+        <div id="mobileMenuPanel" class="w-4/5 max-w-sm bg-minerva-violet text-white h-full shadow-2xl p-6 flex flex-col justify-between -translate-x-full transition-transform duration-300 ease-out">
+            <div>
+                <div class="flex justify-between items-center pb-6 border-b border-white/10">
+                    <div class="font-heading text-xl font-bold">Categorías Minerva</div>
+                    <button onclick="toggleMobileMenu()" class="text-2xl text-gray-300 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div class="mt-4">
+                    <input type="text" oninput="handleSearch(this.value)" placeholder="Buscar en Minerva..." class="w-full bg-white/10 text-white placeholder-gray-400 text-sm rounded-lg px-3 py-2 border border-white/20 focus:outline-none mb-4">
+                </div>
+
+                <ul class="space-y-2 font-medium text-base">
+                    <li><button onclick="filterCategory('all'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition">✨ Todos los Productos</button></li>
+                    <li><button onclick="filterCategory('Shampoo'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition">🧴 Shampoos Profesionales</button></li>
+                    <li><button onclick="filterCategory('Acondicionador'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition">🌿 Acondicionadores</button></li>
+                    <li><button onclick="filterCategory('Tratamiento'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition">💆‍♀️ Máscaras Capilares</button></li>
+                    <li><button onclick="filterCategory('Ampolla'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition">🧪 Ampollas & Serums</button></li>
+                    <li><button onclick="filterCategory('Kit'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition">📦 Kits de Oferta</button></li>
+                </ul>
+            </div>
+
+            <div class="pt-6 border-t border-white/10 space-y-3">
+                <button onclick="openWholesaleModal(); toggleMobileMenu();" class="w-full bg-minerva-pink text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-store"></i> Lista Mayorista
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Slider / Touch Swipe Banner -->
+    <section class="relative bg-gradient-to-r from-minerva-dark via-minerva-violet to-minerva-fuchsia text-white overflow-hidden">
+        
+        <div id="carouselContainer" class="relative overflow-hidden touch-pan-y cursor-grab active:cursor-grabbing">
+            <div id="carouselTrack" class="carousel-track">
+                
+                <!-- Slide 1 -->
+                <div class="carousel-slide py-12 md:py-20 px-4 sm:px-6">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 text-center lg:text-left space-y-5">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-pink-300">
+                                <span class="w-2 h-2 rounded-full bg-minerva-pink animate-ping"></span>
+                                FORMULACIÓN PROFESIONAL EXCLUSIVA
+                            </div>
+                            <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                                Nutrición Capilar <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-minerva-pink to-pink-200">Minerva Gold</span>
+                            </h1>
+                            <p class="text-sm sm:text-lg text-pink-100/90 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                                Restaura, fortalece e ilumina tu cabello con activos naturales ultra-concentrados de Argán y Karité de grado profesional.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                                <a href="#catalog" class="bg-minerva-pink hover:bg-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg shadow-minerva-pink/40 hover:shadow-xl transition flex items-center gap-2">
+                                    <span>Ver Colección</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 flex justify-center">
+                            <div class="w-72 sm:w-80 h-80 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10">
+                                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-slide py-12 md:py-20 px-4 sm:px-6 bg-gradient-to-r from-minerva-violet via-minerva-fuchsia to-minerva-dark">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 text-center lg:text-left space-y-5">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold text-pink-300">
+                                ⚡ OFERTA ESPECIAL SALONES
+                            </div>
+                            <h2 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                                Línea Matizadora <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-white">Violet & Blue</span>
+                            </h2>
+                            <p class="text-sm sm:text-lg text-pink-100/90 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                                Neutralización instantánea para rubios platinados e imponentes. 25% OFF en presentaciones de 1 Litro.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                                <button onclick="filterCategory('Matizador')" class="bg-minerva-pink hover:bg-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg transition">
+                                    Explorar Matizadores
+                                </button>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 flex justify-center">
+                            <div class="w-72 sm:w-80 h-80 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10">
+                                <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-slide py-12 md:py-20 px-4 sm:px-6 bg-gradient-to-r from-minerva-dark via-minerva-violet to-purple-900">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 text-center lg:text-left space-y-5">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold text-pink-300">
+                                🧪 TECNOLOGÍA ÁCIDA
+                            </div>
+                            <h2 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                                Kits Post-Color <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-minerva-pink">Sellado de Cutícula</span>
+                            </h2>
+                            <p class="text-sm sm:text-lg text-pink-100/90 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                                Equilibra el PH de la fibra capilar prolongando la duración del color e intensificando el brillo natural.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                                <button onclick="filterCategory('Kit')" class="bg-minerva-pink hover:bg-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg transition">
+                                    Ver Kits Promocionales
+                                </button>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 flex justify-center">
+                            <div class="w-72 sm:w-80 h-80 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10">
+                                <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Carousel Navigation Arrows -->
+            <button onclick="prevSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-minerva-pink transition z-20">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button onclick="nextSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-minerva-pink transition z-20">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <!-- Slide Indicators Dots -->
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20">
+                <button onclick="goToSlide(0)" class="carousel-dot w-3 h-3 rounded-full bg-white/40 transition-all"></button>
+                <button onclick="goToSlide(1)" class="carousel-dot w-3 h-3 rounded-full bg-white/40 transition-all"></button>
+                <button onclick="goToSlide(2)" class="carousel-dot w-3 h-3 rounded-full bg-white/40 transition-all"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Features Banner -->
+    <section class="bg-minerva-lightPink border-y border-minerva-pink/15 py-6">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="flex flex-col items-center p-2">
+                <i class="fa-solid fa-truck-fast text-2xl text-minerva-fuchsia mb-2"></i>
+                <h4 class="font-bold text-xs sm:text-sm text-minerva-dark">Envíos a todo el país</h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">Gratis desde $45.000</p>
+            </div>
+            <div class="flex flex-col items-center p-2">
+                <i class="fa-solid fa-credit-card text-2xl text-minerva-fuchsia mb-2"></i>
+                <h4 class="font-bold text-xs sm:text-sm text-minerva-dark">3 y 6 Cuotas Sin Interés</h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">Con todas las tarjetas</p>
+            </div>
+            <div class="flex flex-col items-center p-2">
+                <i class="fa-solid fa-tags text-2xl text-minerva-fuchsia mb-2"></i>
+                <h4 class="font-bold text-xs sm:text-sm text-minerva-dark">Descuento Salones</h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">Venta directa por volumen</p>
+            </div>
+            <div class="flex flex-col items-center p-2">
+                <i class="fa-solid fa-headset text-2xl text-minerva-fuchsia mb-2"></i>
+                <h4 class="font-bold text-xs sm:text-sm text-minerva-dark">Asesoramiento Capilar</h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">Diagnóstico técnico libre</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="py-12 bg-gray-50/70 border-t border-gray-200 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                <div>
+                    <span class="text-xs uppercase font-extrabold text-minerva-pink tracking-widest">Líneas Minerva</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-minerva-violet font-heading mt-1">Catálogo de Productos</h2>
+                    <p class="text-sm text-gray-500 mt-1">Fórmulas profesionales para cada necesidad del cabello</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <select id="sortSelect" onchange="sortProducts(this.value)" class="bg-white border border-gray-300 text-gray-700 text-sm rounded-xl px-3 py-2.5 focus:outline-none focus:border-minerva-pink shadow-sm">
+                        <option value="featured">Destacados Minerva</option>
+                        <option value="price-low">Menor Precio</option>
+                        <option value="price-high">Mayor Precio</option>
+                        <option value="name">Nombre (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 custom-scrollbar">
+                <button onclick="filterCategory('all')" class="cat-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-minerva-violet text-white shadow-md">Todos</button>
+                <button onclick="filterCategory('Shampoo')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-gray-600 hover:bg-pink-50 border border-gray-200">Shampoos</button>
+                <button onclick="filterCategory('Acondicionador')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-gray-600 hover:bg-pink-50 border border-gray-200">Acondicionadores</button>
+                <button onclick="filterCategory('Tratamiento')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-gray-600 hover:bg-pink-50 border border-gray-200">Máscaras</button>
+                <button onclick="filterCategory('Ampolla')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-gray-600 hover:bg-pink-50 border border-gray-200">Ampollas</button>
+                <button onclick="filterCategory('Matizador')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-gray-600 hover:bg-pink-50 border border-gray-200">Matizadores</button>
+                <button onclick="filterCategory('Kit')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-gray-600 hover:bg-pink-50 border border-gray-200">Kits Promocionales</button>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- JavaScript renders items here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+        <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div id="cartPanel" class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-out pointer-events-auto">
+            
+            <div class="p-5 bg-minerva-violet text-white flex items-center justify-between shadow-md">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-minerva-pink text-xl"></i>
+                    <h3 class="font-heading text-lg font-bold">Carrito Minerva</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-gray-300 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="bg-minerva-lightPink p-4 border-b border-pink-200">
+                <div class="flex justify-between text-xs font-semibold text-minerva-dark mb-1.5">
+                    <span id="shippingProgressText">¡Añade productos para Envío Gratis!</span>
+                    <span id="shippingTargetText">$45.000</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <div id="shippingProgressBar" class="bg-gradient-to-r from-minerva-fuchsia to-minerva-pink h-full w-0 transition-all duration-500"></div>
+                </div>
+            </div>
+
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar"></div>
+
+            <div class="p-5 bg-white border-t border-gray-200 space-y-3 shadow-lg">
+                <div class="flex justify-between text-sm text-gray-600">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal" class="font-semibold text-gray-900">$0</span>
+                </div>
+                <div class="flex justify-between text-base font-extrabold text-minerva-violet pt-2 border-t border-gray-100">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="text-xl text-minerva-pink">$0</span>
+                </div>
+
+                <div class="space-y-2 pt-2">
+                    <button onclick="checkoutWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-green-600/20 transition">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Finalizar por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Product Modal -->
+    <div id="quickViewModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col md:flex-row">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="md:w-1/2 bg-gray-100 flex items-center justify-center p-6">
+                <img id="modalImg" src="" alt="Producto Minerva" class="max-h-64 md:max-h-80 object-contain drop-shadow-md">
+            </div>
+
+            <div class="md:w-1/2 p-6 flex flex-col justify-between overflow-y-auto">
+                <div>
+                    <span id="modalBadge" class="inline-block bg-pink-100 text-minerva-pink text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider mb-2"></span>
+                    <h3 id="modalTitle" class="text-xl font-bold text-minerva-violet font-heading"></h3>
+                    <p id="modalCategory" class="text-xs text-gray-400 mt-0.5 mb-3"></p>
+                    <p id="modalDesc" class="text-xs text-gray-600 leading-relaxed mb-4"></p>
+
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Presentación / Formato:</label>
+                        <div id="modalSizesContainer" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <div class="flex items-baseline gap-3 mb-4">
+                        <span id="modalPrice" class="text-2xl font-extrabold text-minerva-pink"></span>
+                        <span id="modalOldPrice" class="text-sm text-gray-400 line-through"></span>
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-4 border-t border-gray-100">
+                    <button id="modalAddToCartBtn" class="w-full bg-minerva-pink hover:bg-pink-600 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Añadir al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wholesale Modal -->
+    <div id="wholesaleModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeWholesaleModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-pink-100 text-minerva-pink rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-minerva-violet font-heading">Venta Mayorista Minerva</h3>
+                <p class="text-xs text-gray-500 mt-1">Lista exclusiva de precios directos de fábrica para salones y distribuidores.</p>
+            </div>
+
+            <form onsubmit="handleWholesaleSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Nombre Completo o Salón</label>
+                    <input type="text" required placeholder="Ej. Salón Estilo Minerva" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-minerva-pink">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp de Contacto</label>
+                    <input type="tel" required placeholder="Ej. 11 9876 5432" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-minerva-pink">
+                </div>
+                <button type="submit" class="w-full bg-minerva-violet hover:bg-minerva-dark text-white font-bold py-3.5 rounded-xl shadow-lg transition">
+                    Solicitar Catálogo Mayorista
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-minerva-dark text-white pt-14 pb-8 border-t-4 border-minerva-pink">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-full bg-minerva-pink flex items-center justify-center text-white">
+                        <i class="fa-solid fa-crown text-lg"></i>
+                    </div>
+                    <span class="font-heading text-xl font-extrabold tracking-wider text-white">
+                        MINERVA<span class="text-minerva-pink font-light">CAPILAR</span>
+                    </span>
+                </div>
+                <p class="text-xs text-gray-300 leading-relaxed">
+                    Desarrollos de alta cosmética capilar. Fórmulas de nutrición intensa fabricadas bajo normas internacionales de calidad.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="font-heading font-bold text-pink-300 mb-4 text-sm uppercase tracking-wider">Líneas Minerva</h4>
+                <ul class="space-y-2 text-xs text-gray-300">
+                    <li><a href="#catalog" onclick="filterCategory('Shampoo')" class="hover:text-white transition">Línea Argán Nutrición</a></li>
+                    <li><a href="#catalog" onclick="filterCategory('Tratamiento')" class="hover:text-white transition">Línea Karité Hydro</a></li>
+                    <li><a href="#catalog" onclick="filterCategory('Matizador')" class="hover:text-white transition">Matizadores Violet & Blue</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-heading font-bold text-pink-300 mb-4 text-sm uppercase tracking-wider">Contacto Directo</h4>
+                <ul class="space-y-2.5 text-xs text-gray-300">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-minerva-pink"></i> Buenos Aires, Argentina</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-minerva-pink"></i> contacto@minervacapilar.com.ar</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-heading font-bold text-pink-300 mb-4 text-sm uppercase tracking-wider">Club Minerva</h4>
+                <p class="text-xs text-gray-300 mb-3">Recibí promociones exclusivas en tu correo.</p>
+                <form onsubmit="handleNewsletter(event)" class="space-y-2">
+                    <input type="email" required placeholder="Tu e-mail..." class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-400 text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-minerva-pink">
+                    <button type="submit" class="w-full bg-minerva-pink hover:bg-pink-600 text-white font-bold text-xs py-2.5 rounded-xl transition">Suscribirme</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-white/10 text-center text-xs text-gray-400">
+            <p>© 2026 Minerva Capilar - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* Products Database */
+        const products = [
+            {
+                id: 1,
+                name: "Shampoo Minerva Argán & Macadamia",
+                category: "Shampoo",
+                badge: "MÁS VENDIDO",
+                desc: "Fórmula de nutrición intensiva con Aceite de Argán puro. Aporta brillo espejo y sedosidad desde el primer lavado.",
+                image: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "250ml", price: 5200 },
+                    { label: "1 Litro", price: 14500 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 2,
+                name: "Máscara Minerva Karité Hydro",
+                category: "Tratamiento",
+                badge: "20% OFF",
+                desc: "Baño de crema reparador con Manteca de Karité pura. Reconstruye la fibra capilar muy dañada.",
+                image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "250gr", price: 5800, oldPrice: 7250 },
+                    { label: "1 Kilo", price: 16800, oldPrice: 21000 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 3,
+                name: "Shampoo Matizador Violet Blond",
+                category: "Matizador",
+                badge: "USO PROFESIONAL",
+                desc: "Neutraliza al instante tonos amarillos o anaranjados no deseados en cabellos rubios y decolorados.",
+                image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "250ml", price: 6400 },
+                    { label: "1 Litro", price: 17200 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 4,
+                name: "Ampollas Minerva Restructurantes (Caja x 12)",
+                category: "Ampolla",
+                badge: "ACCIÓN EXPRESS",
+                desc: "Concentrado termo-activo de rescate capilar. Sella la cutícula y previene el quiebre.",
+                image: "https://images.unsplash.com/photo-1608248597262-8382d33454b5?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "Caja x 12u", price: 18900 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 5,
+                name: "Acondicionador Minerva Curly Elastic",
+                category: "Acondicionador",
+                badge: "LIBRE DE SILICONAS",
+                desc: "Formulado para cabellos con rulos. Aporta elasticidad, definición y máximo control del frizz.",
+                image: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "250ml", price: 4900 },
+                    { label: "1 Litro", price: 13800 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 6,
+                name: "Kit Minerva Post-Color PH Ácido",
+                category: "Kit",
+                badge: "OFERTA KIT",
+                desc: "Shampoo + Máscara estabilizadora de color post-tintura. Cierra cutículas y prolonga el tono.",
+                image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "Dúo 250ml", price: 9800, oldPrice: 12200 },
+                    { label: "Dúo 1 Litro", price: 26500, oldPrice: 31000 }
+                ],
+                currentSizeIdx: 0
+            }
+        ];
+
+        let cart = [];
+
+        window.onload = function() {
+            renderProducts(products);
+            initCarouselTouch();
+            updateCartUI();
+        };
+
+        /* ----------------------------------------------------
+           TOUCH SWIPE HERO CAROUSEL LOGIC
+        ---------------------------------------------------- */
+        let currentSlide = 0;
+        const totalSlides = 3;
+        let startX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let isDragging = false;
+        let autoSlideTimer;
+
+        function updateCarouselPosition() {
+            const track = document.getElementById('carouselTrack');
+            currentTranslate = -currentSlide * 100;
+            prevTranslate = currentTranslate;
+            track.style.transform = `translateX(${currentTranslate}%)`;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlide) {
+                    dot.className = "carousel-dot w-6 h-3 rounded-full bg-minerva-pink transition-all";
+                } else {
+                    dot.className = "carousel-dot w-3 h-3 rounded-full bg-white/40 transition-all";
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarouselPosition();
+            resetAutoSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarouselPosition();
+            resetAutoSlide();
+        }
+
+        function goToSlide(idx) {
+            currentSlide = idx;
+            updateCarouselPosition();
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideTimer = setInterval(() => {
+                nextSlide();
+            }, 5000);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideTimer);
+            startAutoSlide();
+        }
+
+        function initCarouselTouch() {
+            const container = document.getElementById('carouselContainer');
+            const track = document.getElementById('carouselTrack');
+
+            // Touch events
+            container.addEventListener('touchstart', touchStart);
+            container.addEventListener('touchmove', touchMove);
+            container.addEventListener('touchend', touchEnd);
+
+            // Mouse drag events
+            container.addEventListener('mousedown', touchStart);
+            container.addEventListener('mousemove', touchMove);
+            container.addEventListener('mouseup', touchEnd);
+            container.addEventListener('mouseleave', () => { if (isDragging) touchEnd(); });
+
+            startAutoSlide();
+            updateCarouselPosition();
+        }
+
+        function touchStart(e) {
+            isDragging = true;
+            startX = getPositionX(e);
+            clearInterval(autoSlideTimer);
+        }
+
+        function touchMove(e) {
+            if (!isDragging) return;
+            const currentX = getPositionX(e);
+            const diff = currentX - startX;
+            const containerWidth = document.getElementById('carouselContainer').offsetWidth;
+            const movePercent = (diff / containerWidth) * 100;
+            
+            document.getElementById('carouselTrack').style.transform = `translateX(${prevTranslate + movePercent}%)`;
+        }
+
+        function touchEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            const track = document.getElementById('carouselTrack');
+            const style = window.getComputedStyle(track);
+            const matrix = new WebKitCSSMatrix(style.transform);
+            const containerWidth = document.getElementById('carouselContainer').offsetWidth;
+            const movedBy = matrix.m41;
+
+            const threshold = containerWidth * 0.2;
+            const expectedOffset = -currentSlide * containerWidth;
+
+            if (movedBy < expectedOffset - threshold && currentSlide < totalSlides - 1) {
+                currentSlide++;
+            } else if (movedBy > expectedOffset + threshold && currentSlide > 0) {
+                currentSlide--;
+            }
+
+            updateCarouselPosition();
+            startAutoSlide();
+        }
+
+        function getPositionX(e) {
+            return e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        }
+
+        /* ----------------------------------------------------
+           CATALOG RENDER & FILTERS
+        ---------------------------------------------------- */
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-gray-500 font-bold">No se encontraron productos.</div>`;
+                return;
+            }
+
+            items.forEach(product => {
+                const currentSize = product.sizes[product.currentSizeIdx];
+                const card = document.createElement('div');
+                card.className = "product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative group";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="absolute top-3 left-3 z-10 flex flex-col gap-1">
+                            ${product.badge ? `<span class="bg-minerva-pink text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider pulse-badge">${product.badge}</span>` : ''}
+                        </div>
+
+                        <div class="relative bg-gray-50 h-52 sm:h-60 overflow-hidden flex items-center justify-center p-4">
+                            <img src="${product.image}" alt="${product.name}" class="product-img h-full object-contain transition-transform duration-500">
+                            <button onclick="openQuickView(${product.id})" class="quick-view-btn opacity-0 translate-y-3 transition duration-300 absolute bottom-3 bg-minerva-violet/90 text-white text-xs font-bold px-4 py-2 rounded-full shadow-md">
+                                <i class="fa-solid fa-eye mr-1"></i> Ver Detalle
+                            </button>
+                        </div>
+
+                        <div class="p-4 space-y-2">
+                            <span class="text-[10px] font-bold text-minerva-fuchsia uppercase tracking-wider">${product.category}</span>
+                            <h3 class="font-bold text-sm sm:text-base text-gray-900 leading-snug hover:text-minerva-pink transition cursor-pointer" onclick="openQuickView(${product.id})">${product.name}</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2">${product.desc}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 pt-0 space-y-3">
+                        <div class="flex flex-wrap gap-1">
+                            ${product.sizes.map((sz, idx) => `
+                                <button onclick="changeProductSize(${product.id}, ${idx})" class="text-[11px] font-semibold px-2 py-0.5 rounded-md border ${idx === product.currentSizeIdx ? 'bg-minerva-violet text-white border-minerva-violet' : 'bg-gray-100 text-gray-600 border-gray-200'} transition">
+                                    ${sz.label}
+                                </button>
+                            `).join('')}
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+                            <div>
+                                <span class="text-lg font-extrabold text-minerva-pink">$${currentSize.price.toLocaleString('es-AR')}</span>
+                            </div>
+                            <button onclick="addToCart(${product.id})" class="bg-minerva-pink hover:bg-pink-600 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-md hover:scale-105 transition">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(cat) {
+            if (cat === 'all') {
+                renderProducts(products);
+            } else {
+                renderProducts(products.filter(p => p.category.toLowerCase().includes(cat.toLowerCase())));
+            }
+        }
+
+        function changeProductSize(productId, sizeIdx) {
+            const prod = products.find(p => p.id === productId);
+            if (prod) {
+                prod.currentSizeIdx = sizeIdx;
+                renderProducts(products);
+            }
+        }
+
+        /* ----------------------------------------------------
+           CART LOGIC
+        ---------------------------------------------------- */
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const currentSize = product.sizes[product.currentSizeIdx];
+            const cartKey = `${product.id}-${currentSize.label}`;
+            const existing = cart.find(item => item.key === cartKey);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    key: cartKey,
+                    name: product.name,
+                    size: currentSize.label,
+                    price: currentSize.price,
+                    image: product.image,
+                    qty: 1
+                });
+            }
+
+            updateCartUI();
+            toggleCartDrawer(true);
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsContainer');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            document.getElementById('cartCount').innerText = totalItems;
+            document.getElementById('cartTotalHeader').innerText = `$${subtotal.toLocaleString('es-AR')}`;
+            document.getElementById('cartSubtotal').innerText = `$${subtotal.toLocaleString('es-AR')}`;
+            document.getElementById('cartTotal').innerText = `$${subtotal.toLocaleString('es-AR')}`;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 text-gray-400 font-bold">El carrito está vacío.</div>`;
+                return;
+            }
+
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
+                    <img src="${item.image}" class="w-12 h-12 object-contain bg-white rounded p-1">
+                    <div class="flex-1">
+                        <h4 class="text-xs font-bold text-gray-800">${item.name}</h4>
+                        <span class="text-[10px] text-gray-500">${item.size}</span>
+                        <span class="text-xs font-extrabold text-minerva-pink block">$${(item.price * item.qty).toLocaleString('es-AR')}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCartDrawer(forceOpen = false) {
+            const drawer = document.getElementById('cartDrawer');
+            const panel = document.getElementById('cartPanel');
+
+            if (forceOpen || drawer.classList.contains('pointer-events-none')) {
+                drawer.classList.remove('pointer-events-none', 'opacity-0');
+                panel.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.add('pointer-events-none', 'opacity-0');
+                panel.classList.add('translate-x-full');
+            }
+        }
+
+        function openQuickView(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+
+            document.getElementById('modalImg').src = prod.image;
+            document.getElementById('modalTitle').innerText = prod.name;
+            document.getElementById('modalCategory').innerText = `Categoría: ${prod.category}`;
+            document.getElementById('modalDesc').innerText = prod.desc;
+            document.getElementById('modalPrice').innerText = `$${prod.sizes[prod.currentSizeIdx].price.toLocaleString('es-AR')}`;
+
+            document.getElementById('modalAddToCartBtn').onclick = () => {
+                addToCart(prod.id);
+                closeQuickView();
+            };
+
+            document.getElementById('quickViewModal').classList.remove('hidden');
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickViewModal').classList.add('hidden');
+        }
+
+        function openWholesaleModal() {
+            document.getElementById('wholesaleModal').classList.remove('hidden');
+        }
+
+        function closeWholesaleModal() {
+            document.getElementById('wholesaleModal').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const panel = document.getElementById('mobileMenuPanel');
+            menu.classList.toggle('pointer-events-none');
+            menu.classList.toggle('opacity-0');
+            panel.classList.toggle('-translate-x-full');
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return alert("El carrito está vacío");
+            let msg = "Hola Minerva Capilar! Quisiera realizar el siguiente pedido:\n\n";
+            cart.forEach(i => msg += `• ${i.name} (${i.size}) x${i.qty} - $${(i.price * i.qty).toLocaleString('es-AR')}\n`);
+            window.open(`https://wa.me/5491112345678?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function handleSearch(q) {
+            if (!q) return renderProducts(products);
+            renderProducts(products.filter(p => p.name.toLowerCase().includes(q.toLowerCase())));
+        }
+
+        function handleWholesaleSubmit(e) {
+            e.preventDefault();
+            alert("¡Solicitud recibida! Te contactaremos a la brevedad.");
+            closeWholesaleModal();
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            alert("¡Suscrito al Club Minerva Capilar!");
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
