@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minerva Capilar - Cosmética Profesional</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bekim: {
+                            dark: '#1C0629',      /* Deep Dark Purple */
+                            violet: '#2D0B3F',    /* Bekim Violet Base */
+                            purple: '#3B1252',    /* Accent Purple */
+                            magenta: '#8B1E84',   /* Bekim Magenta */
+                            pink: '#E20074',      /* Electric Accent Pink */
+                            pinkLight: '#D10068',
+                            bgLight: '#FBF9FC',   /* Soft background tint */
+                            cardBg: '#FFFFFF',
+                            borderPink: 'rgba(226, 0, 116, 0.2)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Styles & Animation */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FBF9FC;
+            color: #1F2937;
+        }
+        h1, h2, h3, h4, h5, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(45, 11, 63, 0.97);
+            backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F3EEF5;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #8B1E84;
+            border-radius: 10px;
+        }
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(45, 11, 63, 0.12), 0 8px 10px -6px rgba(226, 0, 116, 0.1);
+        }
+        .toast-enter {
+            animation: slideInUp 0.3s forwards ease-out;
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden custom-scrollbar bg-bekim-bgLight">
+
+    <div class="bg-bekim-dark text-white text-xs py-2 px-4 font-medium tracking-wide border-b border-bekim-pink/30">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
+            <div class="flex items-center gap-2">
+                <span class="bg-bekim-pink text-white text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full animate-pulse">ENVÍO GRATIS</span>
+                <span>En compras mayores a <strong>$45.000</strong> a todo el país 🇦🇷</span>
+            </div>
+            <div class="flex items-center gap-6 text-gray-300">
+                <span class="hidden sm:inline"><i class="fa-solid fa-credit-card text-pink-400 mr-1"></i> 3 y 6 Cuotas Sin Interés</span>
+                <button onclick="openWholesaleModal()" class="text-xs font-bold text-pink-300 hover:text-white transition flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full border border-white/20">
+                    <i class="fa-solid fa-store text-bekim-pink"></i> VENTA MAYORISTA / PELUQUERÍAS
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-40 glass-nav text-white shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
+            
+            <!-- Mobile Menu Toggle Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-white hover:text-bekim-pink transition focus:outline-none p-1">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2.5 group">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-bekim-pink via-bekim-magenta to-bekim-purple flex items-center justify-center text-white shadow-lg shadow-bekim-pink/30 group-hover:scale-105 transition duration-300">
+                    <i class="fa-solid fa-crown text-xl"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading text-2xl font-black tracking-wider text-white leading-none">
+                        MINERVA<span class="text-bekim-pink font-light">CAPILAR</span>
+                    </span>
+                    <span class="text-[9px] uppercase tracking-[0.25em] text-pink-200 font-semibold mt-0.5">Cosmética Profesional</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Desktop) -->
+            <div class="hidden md:flex flex-1 max-w-md relative mx-4">
+                <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Buscar shampoo, máscara, ampolla, alisado..." 
+                    class="w-full bg-white/10 text-white placeholder-pink-200/60 text-sm rounded-full pl-4 pr-10 py-2.5 border border-white/20 focus:outline-none focus:bg-white focus:text-gray-900 focus:placeholder-gray-400 focus:border-bekim-pink transition-all shadow-inner">
+                <button class="absolute right-3.5 top-1/2 -translate-y-1/2 text-pink-200 hover:text-white">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <!-- Header Action Icons -->
+            <div class="flex items-center gap-3 sm:gap-5">
+                <a href="https://wa.me/5491112345678" target="_blank" class="hidden sm:flex items-center gap-2 text-xs font-semibold hover:text-pink-300 transition">
+                    <div class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-lg">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <span class="hidden lg:inline">Asesoramiento</span>
+                </a>
+
+                <!-- Cart Button Trigger -->
+                <button onclick="toggleCartDrawer()" class="relative text-white hover:text-bekim-pink transition focus:outline-none flex items-center gap-2.5 bg-white/10 px-3.5 py-2 rounded-full border border-white/15 hover:border-bekim-pink">
+                    <i class="fa-solid fa-bag-shopping text-xl text-pink-300"></i>
+                    <span id="cartCount" class="bg-bekim-pink text-white text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+                    <span id="cartTotalHeader" class="hidden lg:inline text-xs font-semibold border-l border-white/20 pl-2">$0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Categories Bar (Desktop) -->
+        <nav class="hidden lg:block border-t border-white/10 bg-bekim-dark/60">
+            <div class="max-w-7xl mx-auto px-6">
+                <ul class="flex items-center justify-between text-sm font-medium text-gray-200">
+                    <li><button onclick="filterCategory('all')" class="py-3 px-4 hover:text-pink-300 transition font-bold text-white">Inicio</button></li>
+                    <li><button onclick="filterCategory('Shampoo')" class="py-3 px-4 hover:text-pink-300 transition">Shampoos</button></li>
+                    <li><button onclick="filterCategory('Acondicionador')" class="py-3 px-4 hover:text-pink-300 transition">Acondicionadores</button></li>
+                    <li><button onclick="filterCategory('Máscara')" class="py-3 px-4 hover:text-pink-300 transition">Máscaras & Crema</button></li>
+                    <li><button onclick="filterCategory('Ampolla')" class="py-3 px-4 hover:text-pink-300 transition">Ampollas & Sérums</button></li>
+                    <li><button onclick="filterCategory('Tratamiento Especial')" class="py-3 px-4 hover:text-pink-300 transition">Tratamientos & Alisados</button></li>
+                    <li><button onclick="filterCategory('Kit')" class="py-3 px-4 hover:text-pink-300 transition">Kits Profesionales</button></li>
+                    <li><button onclick="openWholesaleModal()" class="py-3 px-4 text-pink-300 hover:text-white font-bold transition flex items-center gap-1.5"><i class="fa-solid fa-tag"></i> Descuentos Salones</button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div id="mobileMenu" class="fixed inset-0 bg-black/70 z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex">
+        <div id="mobileMenuPanel" class="w-4/5 max-w-sm bg-bekim-violet text-white h-full shadow-2xl p-6 flex flex-col justify-between -translate-x-full transition-transform duration-300 ease-out">
+            <div>
+                <div class="flex justify-between items-center pb-5 border-b border-white/10">
+                    <div class="font-heading text-xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-bars-staggered text-bekim-pink"></i> Menú
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="text-2xl text-gray-300 hover:text-white p-1"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div class="mt-4 mb-4">
+                    <input type="text" oninput="handleSearch(this.value); toggleMobileMenu();" placeholder="Buscar productos..." class="w-full bg-white/10 text-white placeholder-pink-200/50 text-sm rounded-xl px-3.5 py-2.5 border border-white/20 focus:outline-none">
+                </div>
+
+                <ul class="space-y-2 font-medium text-sm">
+                    <li><button onclick="filterCategory('all'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition flex items-center gap-2"><i class="fa-solid fa-border-all text-pink-400"></i> Todos los Productos</button></li>
+                    <li><button onclick="filterCategory('Shampoo'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition flex items-center gap-2"><i class="fa-solid fa-pump-soap text-pink-400"></i> Shampoos Profesionales</button></li>
+                    <li><button onclick="filterCategory('Acondicionador'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition flex items-center gap-2"><i class="fa-solid fa-bottle-droplet text-pink-400"></i> Acondicionadores</button></li>
+                    <li><button onclick="filterCategory('Máscara'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition flex items-center gap-2"><i class="fa-solid fa-jar text-pink-400"></i> Máscaras de Tratamiento</button></li>
+                    <li><button onclick="filterCategory('Ampolla'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition flex items-center gap-2"><i class="fa-solid fa-vial text-pink-400"></i> Ampollas & Óleos</button></li>
+                    <li><button onclick="filterCategory('Tratamiento Especial'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-pink-400"></i> Alisados & Cauterizadores</button></li>
+                    <li><button onclick="filterCategory('Kit'); toggleMobileMenu();" class="w-full text-left py-2.5 px-3 rounded-lg hover:bg-white/10 transition flex items-center gap-2"><i class="fa-solid fa-box-open text-pink-400"></i> Kits Promocionales</button></li>
+                </ul>
+            </div>
+
+            <div class="pt-6 border-t border-white/10 space-y-3">
+                <button onclick="openWholesaleModal(); toggleMobileMenu();" class="w-full bg-bekim-pink text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-store"></i> Canal Mayorista / Peluquerías
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <section class="relative bg-gradient-to-r from-bekim-dark via-bekim-violet to-bekim-purple text-white overflow-hidden py-12 md:py-20 border-b border-bekim-pink/20">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-bekim-pink/25 via-transparent to-transparent opacity-80"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-7 text-center lg:text-left space-y-5">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-pink-300">
+                    <span class="w-2 h-2 rounded-full bg-bekim-pink animate-ping"></span>
+                    NUEVA FÓRMULA BEKIM INSPIRED
+                </div>
+                <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                    Salud y Brillo para tu Cabello <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-bekim-pink to-pink-200">Nivel Profesional</span>
+                </h1>
+                <p class="text-sm sm:text-base text-pink-100/90 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                    Tratamientos intensivos formulados con Argán, Keratina Pura, Ácido Hialurónico y Bioplex. Resultados visibles desde la primera aplicación.
+                </p>
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-3">
+                    <a href="#catalog" class="bg-bekim-pink hover:bg-bekim-pinkLight text-white font-bold px-8 py-3.5 rounded-full shadow-xl shadow-bekim-pink/30 hover:shadow-bekim-pink/50 hover:scale-105 transition duration-300 flex items-center gap-2 text-sm">
+                        <span>Explorar Productos</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <button onclick="openWholesaleModal()" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-6 py-3.5 rounded-full transition backdrop-blur-md text-sm">
+                        Peluquerías & Mayoristas
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 flex justify-center relative">
+                <div class="relative w-72 sm:w-80 lg:w-96 h-80 sm:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 transform rotate-1 hover:rotate-0 transition duration-500">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" alt="Minerva Tratamiento Capilar" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bekim-violet/90 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-pink-200 uppercase tracking-widest font-bold">Línea Destacada</p>
+                                <p class="text-base font-bold text-white font-heading">Reestructuración Bioplex</p>
+                            </div>
+                            <span class="bg-bekim-pink text-white text-xs font-extrabold px-3 py-1 rounded-full">25% OFF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white border-b border-gray-200 py-4 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 custom-scrollbar">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider whitespace-nowrap mr-2"><i class="fa-solid fa-filter text-bekim-pink"></i> Tipo de Cabello:</span>
+                <button onclick="filterByHairType('all')" class="hair-type-btn text-xs font-semibold px-3.5 py-1.5 rounded-full bg-bekim-violet text-white whitespace-nowrap transition">Todos</button>
+                <button onclick="filterByHairType('Decolorado')" class="hair-type-btn text-xs font-semibold px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-pink-50 hover:text-bekim-pink whitespace-nowrap transition">Decolorados / Rubios</button>
+                <button onclick="filterByHairType('Dañado')" class="hair-type-btn text-xs font-semibold px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-pink-50 hover:text-bekim-pink whitespace-nowrap transition">Muy Dañado / Quebradizo</button>
+                <button onclick="filterByHairType('Frizz')" class="hair-type-btn text-xs font-semibold px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-pink-50 hover:text-bekim-pink whitespace-nowrap transition">Con Frizz / Seco</button>
+                <button onclick="filterByHairType('Procesado')" class="hair-type-btn text-xs font-semibold px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-pink-50 hover:text-bekim-pink whitespace-nowrap transition">Post-Alisado / Químico</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog" class="py-12 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+                    <span class="text-xs font-extrabold uppercase text-bekim-pink tracking-widest">Catálogo Profesional</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-bekim-violet font-heading mt-1">Nuestros Productos</h2>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-1">Haz clic en cualquier producto para ver su ficha técnica, ingredientes y modo de uso</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <label class="text-xs font-bold text-gray-500 whitespace-nowrap">Ordenar por:</label>
+                    <select id="sortSelect" onchange="sortProducts(this.value)" class="bg-white border border-gray-300 text-gray-700 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-bekim-pink shadow-sm">
+                        <option value="featured">Destacados</option>
+                        <option value="price-low">Menor Precio</option>
+                        <option value="price-high">Mayor Precio</option>
+                        <option value="name">Nombre (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product Cards Grid Container -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Products dynamically rendered by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <div id="productDetailModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm hidden overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative my-8 max-h-[92vh] flex flex-col md:flex-row">
+            
+            <!-- Close Modal Button -->
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-gray-100 hover:bg-bekim-pink hover:text-white text-gray-600 flex items-center justify-center transition shadow-md">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Left: Product Image & Badges -->
+            <div class="md:w-1/2 bg-gray-50 p-6 flex flex-col items-center justify-center relative border-b md:border-b-0 md:border-r border-gray-100">
+                <span id="modalBadge" class="absolute top-4 left-4 bg-bekim-pink text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow"></span>
+                <img id="modalImg" src="" alt="Producto" class="max-h-64 sm:max-h-80 object-contain drop-shadow-xl hover:scale-105 transition duration-500">
+            </div>
+
+            <!-- Modal Right: Details, Variations & Interactive Tabs -->
+            <div class="md:w-1/2 p-6 flex flex-col justify-between overflow-y-auto custom-scrollbar">
+                <div>
+                    <div class="flex items-center gap-1 text-amber-400 text-xs mb-1">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span class="text-gray-400 font-semibold ml-1 text-[11px]">(4.9 / 5.0)</span>
+                    </div>
+
+                    <h3 id="modalTitle" class="text-xl font-extrabold text-bekim-violet font-heading leading-tight"></h3>
+                    <p id="modalCategory" class="text-xs font-semibold text-bekim-magenta mt-1 mb-3"></p>
+                    
+                    <!-- Volume Variant Selector -->
+                    <div class="mb-4 bg-bekim-bgLight p-3 rounded-2xl border border-bekim-pink/20">
+                        <label class="block text-xs font-bold text-gray-700 mb-2">Seleccionar Presentación / Tamaño:</label>
+                        <div id="modalSizesContainer" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <!-- Pricing Display -->
+                    <div class="flex items-baseline gap-3 mb-4">
+                        <span id="modalPrice" class="text-2xl font-extrabold text-bekim-pink font-heading"></span>
+                        <span id="modalOldPrice" class="text-xs text-gray-400 line-through"></span>
+                    </div>
+
+                    <!-- Modal Interactive Tabs (Modo de Uso / Ingredientes / Resultados) -->
+                    <div class="border-b border-gray-200 mb-3">
+                        <div class="flex gap-4 text-xs font-bold">
+                            <button onclick="switchModalTab('usage')" id="tabBtnUsage" class="modal-tab-btn pb-2 text-bekim-pink border-b-2 border-bekim-pink">Modo de Uso</button>
+                            <button onclick="switchModalTab('ingredients')" id="tabBtnIngredients" class="modal-tab-btn pb-2 text-gray-400 border-b-2 border-transparent hover:text-bekim-pink">Ingredientes</button>
+                            <button onclick="switchModalTab('results')" id="tabBtnResults" class="modal-tab-btn pb-2 text-gray-400 border-b-2 border-transparent hover:text-bekim-pink">Resultados</button>
+                        </div>
+                    </div>
+
+                    <div id="tabContentUsage" class="tab-content text-xs text-gray-600 leading-relaxed mb-4"></div>
+                    <div id="tabContentIngredients" class="tab-content text-xs text-gray-600 leading-relaxed mb-4 hidden"></div>
+                    <div id="tabContentResults" class="tab-content text-xs text-gray-600 leading-relaxed mb-4 hidden"></div>
+                </div>
+
+                <!-- Quantity & Actions Bar -->
+                <div class="space-y-3 pt-4 border-t border-gray-100">
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center border border-gray-300 rounded-xl bg-gray-50">
+                            <button onclick="adjustModalQty(-1)" class="w-9 h-9 font-bold text-gray-600 hover:bg-gray-200 rounded-l-xl flex items-center justify-center">-</button>
+                            <span id="modalQtyVal" class="w-10 text-center text-xs font-bold text-gray-800">1</span>
+                            <button onclick="adjustModalQty(1)" class="w-9 h-9 font-bold text-gray-600 hover:bg-gray-200 rounded-r-xl flex items-center justify-center">+</button>
+                        </div>
+                        
+                        <button id="modalAddToCartBtn" class="flex-1 bg-bekim-pink hover:bg-bekim-pinkLight text-white font-bold py-2.5 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                        </button>
+                    </div>
+
+                    <button id="modalBuyWhatsappBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Comprar Ahora por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+        <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        
+        <div id="cartPanel" class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-out pointer-events-auto">
+            
+            <div class="p-5 bg-bekim-violet text-white flex items-center justify-between shadow-md">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-bekim-pink text-xl"></i>
+                    <h3 class="font-heading text-lg font-bold">Tu Carrito de Compras</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-gray-300 hover:text-white text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Free Shipping Target Progress Bar -->
+            <div class="bg-bekim-bgLight p-4 border-b border-pink-200/50">
+                <div class="flex justify-between text-xs font-semibold text-bekim-dark mb-1.5">
+                    <span id="shippingProgressText">Añade productos para Envío Gratis</span>
+                    <span id="shippingTargetText">$45.000</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <div id="shippingProgressBar" class="bg-gradient-to-r from-bekim-magenta to-bekim-pink h-full w-0 transition-all duration-500"></div>
+                </div>
+            </div>
+
+            <!-- Cart Items Container -->
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar"></div>
+
+            <!-- Cart Summary Footer -->
+            <div class="p-5 bg-white border-t border-gray-200 space-y-3 shadow-lg">
+                <div class="flex justify-between text-xs text-gray-600">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal" class="font-bold text-gray-900">$0</span>
+                </div>
+                <div class="flex justify-between text-xs text-gray-600">
+                    <span>Envío:</span>
+                    <span id="cartShippingCost" class="font-bold text-green-600">Calculando...</span>
+                </div>
+                <div class="flex justify-between text-base font-extrabold text-bekim-violet pt-2 border-t border-gray-100">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="text-xl text-bekim-pink font-heading">$0</span>
+                </div>
+
+                <div class="space-y-2 pt-2">
+                    <button onclick="checkoutWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-green-600/20 transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Finalizar Pedido por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wholesaleModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeWholesaleModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-pink-100 text-bekim-pink rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-bekim-violet font-heading">Venta Mayorista y Salones</h3>
+                <p class="text-xs text-gray-500 mt-1">Accedé a la lista de precios especial con hasta un 45% de descuento en compras por volumen.</p>
+            </div>
+
+            <form onsubmit="handleWholesaleSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Nombre Completo o Salón</label>
+                    <input type="text" required placeholder="Ej. Peluquería Bella Estilo" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs focus:outline-none focus:border-bekim-pink">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp / Teléfono</label>
+                    <input type="tel" required placeholder="Ej. 11 9876 5432" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs focus:outline-none focus:border-bekim-pink">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Provincia / Localidad</label>
+                    <input type="text" required placeholder="Ej. Buenos Aires, CABA" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs focus:outline-none focus:border-bekim-pink">
+                </div>
+                <button type="submit" class="w-full bg-bekim-violet hover:bg-bekim-dark text-white font-bold py-3 rounded-xl shadow-lg transition text-xs">
+                    Solicitar Catálogo & Lista de Precios
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <footer class="bg-bekim-dark text-white pt-12 pb-8 border-t-4 border-bekim-pink">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-bekim-pink flex items-center justify-center text-white">
+                        <i class="fa-solid fa-crown text-sm"></i>
+                    </div>
+                    <span class="font-heading text-lg font-extrabold tracking-wider text-white">
+                        MINERVA<span class="text-bekim-pink font-light">CAPILAR</span>
+                    </span>
+                </div>
+                <p class="text-xs text-gray-300 leading-relaxed">
+                    Cosmética capilar profesional de alta calidad. Fórmulas exclusivas desarrolladas para el cuidado, restauración y embellecimiento del cabello.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="font-heading font-bold text-pink-300 mb-3 text-xs uppercase tracking-wider">Categorías</h4>
+                <ul class="space-y-1.5 text-xs text-gray-300">
+                    <li><a href="#catalog" onclick="filterCategory('Shampoo')" class="hover:text-white transition">Shampoos Ácidos & Neutros</a></li>
+                    <li><a href="#catalog" onclick="filterCategory('Máscara')" class="hover:text-white transition">Máscaras de Tratamiento</a></li>
+                    <li><a href="#catalog" onclick="filterCategory('Ampolla')" class="hover:text-white transition">Ampollas Bioplex & Sérums</a></li>
+                    <li><a href="#catalog" onclick="filterCategory('Tratamiento Especial')" class="hover:text-white transition">Alisados & Cauterizadores</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-heading font-bold text-pink-300 mb-3 text-xs uppercase tracking-wider">Contacto & Asesoría</h4>
+                <ul class="space-y-2 text-xs text-gray-300">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-bekim-pink"></i> Buenos Aires, Argentina</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-bekim-pink"></i> +54 9 11 1234-5678</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-bekim-pink"></i> ventas@minervacapilar.com.ar</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-heading font-bold text-pink-300 mb-3 text-xs uppercase tracking-wider">Redes Sociales</h4>
+                <div class="flex gap-3">
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-bekim-pink flex items-center justify-center text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-bekim-pink flex items-center justify-center text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-bekim-pink flex items-center justify-center text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-white/10 text-center text-xs text-gray-400">
+            <p>© 2026 Minerva Capilar - Inspirado en el diseño Bekim Cosmética. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ----------------------------------------------------
+           PRODUCTS DATABASE (Bekim Inspired Minerva Catalog)
+        ---------------------------------------------------- */
+        const products = [
+            {
+                id: 1,
+                name: "Shampoo Ácido pH Balancer 3.5",
+                category: "Shampoo",
+                hairType: "Procesado",
+                badge: "MÁS VENDIDO",
+                desc: "Shampoo técnico de pH ácido especialmente desarrollado para estabilizar la fibra capilar luego de procesos químicos de tintura, decoloración o alisado.",
+                usage: "Aplicar sobre el cabello húmedo, masajear suavemente el cuero cabelludo con la yema de los dedos durante 2 minutos y enjuagar con abundante agua tibia.",
+                ingredients: "Ácido Cítrico, Keratina Hidrolizada, Extracto de Manzanilla, Filtro UV y Pro-Vitamina B5.",
+                results: "Sellado perfecto de la cutícula, retención del color por más tiempo y eliminación inmediata del alcalino residual.",
+                image: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "250 ml", price: 5400 },
+                    { label: "500 ml", price: 8900 },
+                    { label: "1000 ml", price: 14800 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 2,
+                name: "Máscara Nutritiva Keratina & Argán",
+                category: "Máscara",
+                hairType: "Dañado",
+                badge: "REPARACIÓN INTENSA",
+                desc: "Tratamiento intensivo de reestructuración profunda que combina Manteca de Karité, Aceite de Argán virgen y Keratina pura.",
+                usage: "Luego del lavado, aplicar de medios a puntas. Dejar actuar de 10 a 15 minutos (ideal con gorro térmico) y enjuagar al 100%.",
+                ingredients: "Aceite de Argán Orgánico, Keratina de Bajo Peso Molecular, Manteca de Karité y Vitamina E.",
+                results: "Cabello visiblemente más suave, eliminación del frizz, resistencia al quiebre y elasticidad natural recuperada.",
+                image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "250 gr", price: 6200, oldPrice: 7800 },
+                    { label: "500 gr", price: 10500, oldPrice: 13000 },
+                    { label: "1000 gr", price: 17900, oldPrice: 21500 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 3,
+                name: "Ampollas Reestructurantes Bioplex (Caja x 12)",
+                category: "Ampolla",
+                hairType: "Decolorado",
+                badge: "EFECTO FLASH",
+                desc: "Concentrado biotecnológico de rescate capilar. Reconstruye los enlaces disulfuro rotos por decoloraciones extremas.",
+                usage: "Mezclar el contenido de 1 ampolla con 3 partes de agua tibia hasta formar una crema homogénea. Aplicar sobre cabello húmedo, dejar 5 min y enjuagar.",
+                ingredients: "Complejo Bioplex Bond Repair, Aminoácidos de Seda, Pantenol y Proteína de Trigo.",
+                results: "Reconstrucción instantánea de la masa capilar interna, dándole fuerza y elasticidad en solo 5 minutos.",
+                image: "https://images.unsplash.com/photo-1608248597262-8382d33454b5?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "Caja x 12u (15ml)", price: 19500 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 4,
+                name: "Sérum Reparador de Puntas Cauterizador",
+                category: "Ampolla",
+                hairType: "Frizz",
+                badge: "NUEVO",
+                desc: "Óleo finalizador ultra liviano de absorción rápida que sella las puntas abiertas y brinda protección térmica de hasta 230°C.",
+                usage: "Colocar 2 a 3 gotas en la palma de las manos, frotar y distribuir uniformemente sobre cabello seco o húmedo de medios a puntas.",
+                ingredients: "Aceite de Argán, Macadamia, Siliconas Volátiles de Alta Calidad y Escualano Vegetal.",
+                results: "Puntas selladas de inmediato, toque sedoso no graso y brillo reflectante tipo espejo.",
+                image: "https://images.unsplash.com/photo-1608248597262-8382d33454b5?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "30 ml", price: 11200 },
+                    { label: "60 ml", price: 18400 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 5,
+                name: "Acondicionador Hidratante Intenso",
+                category: "Acondicionador",
+                hairType: "Frizz",
+                badge: "USO DIARIO",
+                desc: "Acondicionador suavizante enriquecido con aceite de coco y aloe vera para desenredar sin aportar peso.",
+                usage: "Aplicar sobre el cabello húmedo luego del shampoo, peinar con los dedos durante 1 minuto y enjuagar bien.",
+                ingredients: "Aloe Vera Gel, Aceite de Coco Virgen, Glicerina Vegetal y Cloruro de Cetrimonio.",
+                results: "Desenredo instantáneo, hidratación liviana y suavidad sedosa de uso diario.",
+                image: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "250 ml", price: 4900 },
+                    { label: "1000 ml", price: 13500 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 6,
+                name: "Alisado Pro-Tech Sin Formol",
+                category: "Tratamiento Especial",
+                hairType: "Procesado",
+                badge: "EXCLUSIVO SALÓN",
+                desc: "Sistema alisador progresivo de tecnología ácida orgánica. Reduce el volumen al 100% sin generar vapores tóxicos.",
+                usage: "Uso profesional. Aplicar mecha por mecha, dejar actuar 45 minutos, secar al 100% y planchar a temperatura adecuada.",
+                ingredients: "Ácido Glioxílico, Karité, Keratina Vegetal, Aceite de Argán y Aminoácidos Esenciales.",
+                results: "Cabello 100% lacio, dócil, brillante y libre de frizz por hasta 3 a 4 meses.",
+                image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "500 ml", price: 18500 },
+                    { label: "1000 ml", price: 29900 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 7,
+                name: "Kit Completo Reparación Intensiva",
+                category: "Kit",
+                hairType: "Dañado",
+                badge: "AHORRO 20%",
+                desc: "Incluye Shampoo Ácido + Máscara Nutritiva + Sérum Cauterizador de Regalo para un tratamiento completo en casa.",
+                usage: "Lavar con Shampoo Ácido, aplicar Máscara Nutritiva por 10 min, enjuagar y finalizar con 2 gotas de Sérum.",
+                ingredients: "Combinación de fórmulas con Argán, Keratina y Bioplex.",
+                results: "Restauración integral de la salud capilar en 3 simples pasos.",
+                image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "Kit Mediano (250ml c/u)", price: 21500, oldPrice: 26800 },
+                    { label: "Kit Profesional (1000ml c/u)", price: 48900, oldPrice: 61000 }
+                ],
+                currentSizeIdx: 0
+            },
+            {
+                id: 8,
+                name: "Baño de Crema Ácido Restaurador",
+                category: "Máscara",
+                hairType: "Decolorado",
+                badge: "POST-DECOLORACIÓN",
+                desc: "Crema ácida restauradora con pigmentos violetas sutiles que aportan nutrición mientras cuida los tonos rubios.",
+                usage: "Aplicar uniformemente sobre cabello húmedo. Dejar actuar de 5 a 10 minutos y enjuagar.",
+                ingredients: "Micro-pigmentos Violetas, Aceite de Lino, Ácido Láctico y Keratina.",
+                results: "Nutrición intensa con neutralización sutil de reflejos amarillos indeseados.",
+                image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=500&q=80",
+                sizes: [
+                    { label: "250 gr", price: 5900 },
+                    { label: "1000 gr", price: 16500 }
+                ],
+                currentSizeIdx: 0
+            }
+        ];
+
+        /* State Variables */
+        let cart = [];
+        let activeCategory = 'all';
+        let activeHairType = 'all';
+        let activeModalProduct = null;
+        let activeModalQty = 1;
+
+        /* Initialize Page */
+        window.onload = function() {
+            renderProducts(products);
+            updateCartUI();
+        };
+
+        /* ----------------------------------------------------
+           RENDER PRODUCTS GRID & CARDS
+        ---------------------------------------------------- */
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-gray-500 bg-white rounded-3xl p-8 border border-gray-200">
+                        <i class="fa-solid fa-droplet-slash text-4xl text-bekim-pink mb-3"></i>
+                        <h4 class="font-bold text-gray-800 text-lg">No encontramos productos</h4>
+                        <p class="text-xs text-gray-500 mt-1">Prueba seleccionando otra categoría o tipo de cabello.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            items.forEach(product => {
+                const currentSize = product.sizes[product.currentSizeIdx];
+                const card = document.createElement('div');
+                card.className = "product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative group cursor-pointer";
+                
+                // Clicking anywhere on card opens detailed modal
+                card.onclick = (e) => {
+                    // Prevent opening modal if clicking directly on add-to-cart or size buttons
+                    if (!e.target.closest('.stop-propagation')) {
+                        openProductModal(product.id);
+                    }
+                };
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Top Badge -->
+                        <div class="absolute top-3 left-3 z-10">
+                            ${product.badge ? `<span class="bg-bekim-pink text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">${product.badge}</span>` : ''}
+                        </div>
+
+                        <!-- Product Image Area -->
+                        <div class="relative bg-bekim-bgLight h-56 sm:h-64 overflow-hidden flex items-center justify-center p-4">
+                            <img src="${product.image}" alt="${product.name}" class="h-full object-contain transition-transform duration-500 group-hover:scale-105">
+                            
+                            <div class="absolute inset-0 bg-bekim-violet/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                                <span class="bg-white text-bekim-violet text-xs font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition duration-300">
+                                    <i class="fa-solid fa-eye text-bekim-pink"></i> Ver Ficha Técnica
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Card Header & Content -->
+                        <div class="p-4 space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-bold text-bekim-magenta uppercase tracking-wider">${product.category}</span>
+                                <span class="text-[10px] font-semibold text-gray-400"><i class="fa-solid fa-scissors"></i> ${product.hairType}</span>
+                            </div>
+                            <h3 class="font-extrabold text-sm sm:text-base text-gray-900 leading-tight group-hover:text-bekim-pink transition">${product.name}</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">${product.desc}</p>
+                        </div>
+                    </div>
+
+                    <!-- Sizes & Price Footer -->
+                    <div class="p-4 pt-0 space-y-3">
+                        <!-- Size Switcher Buttons -->
+                        <div class="flex flex-wrap gap-1 stop-propagation">
+                            ${product.sizes.map((sz, idx) => `
+                                <button onclick="changeProductSize(${product.id}, ${idx})" class="text-[10px] font-bold px-2 py-0.5 rounded-md border ${idx === product.currentSizeIdx ? 'bg-bekim-violet text-white border-bekim-violet' : 'bg-gray-100 text-gray-600 border-gray-200 hover:bg-pink-50'} transition">
+                                    ${sz.label}
+                                </button>
+                            `).join('')}
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+                            <div>
+                                <span class="text-lg font-extrabold text-bekim-pink font-heading">$${currentSize.price.toLocaleString('es-AR')}</span>
+                                ${currentSize.oldPrice ? `<span class="text-xs text-gray-400 line-through block">$${currentSize.oldPrice.toLocaleString('es-AR')}</span>` : ''}
+                            </div>
+                            
+                            <button onclick="addToCart(${product.id})" class="stop-propagation bg-bekim-pink hover:bg-bekim-pinkLight text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-md hover:scale-105 transition" title="Agregar al Carrito">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function changeProductSize(productId, sizeIdx) {
+            const prod = products.find(p => p.id === productId);
+            if (prod) {
+                prod.currentSizeIdx = sizeIdx;
+                renderProducts(filterData());
+            }
+        }
+
+        /* ----------------------------------------------------
+           INTERACTIVE PRODUCT MODAL (CLICK ON PRODUCT)
+        ---------------------------------------------------- */
+        function openProductModal(productId) {
+            const prod = products.find(p => p.id === productId);
+            if (!prod) return;
+
+            activeModalProduct = prod;
+            activeModalQty = 1;
+            document.getElementById('modalQtyVal').innerText = activeModalQty;
+
+            document.getElementById('modalImg').src = prod.image;
+            document.getElementById('modalTitle').innerText = prod.name;
+            document.getElementById('modalCategory').innerText = `Categoría: ${prod.category} | Tipo de Cabello: ${prod.hairType}`;
+            document.getElementById('modalBadge').innerText = prod.badge || 'MINERVA CAPILAR';
+
+            // Tab contents
+            document.getElementById('tabContentUsage').innerText = prod.usage;
+            document.getElementById('tabContentIngredients').innerText = prod.ingredients;
+            document.getElementById('tabContentResults').innerText = prod.results;
+
+            switchModalTab('usage');
+            updateModalPriceAndSizes();
+
+            document.getElementById('productDetailModal').classList.remove('hidden');
+        }
+
+        function updateModalPriceAndSizes() {
+            if (!activeModalProduct) return;
+            const currentSize = activeModalProduct.sizes[activeModalProduct.currentSizeIdx];
+
+            document.getElementById('modalPrice').innerText = `$${(currentSize.price * activeModalQty).toLocaleString('es-AR')}`;
+            document.getElementById('modalOldPrice').innerText = currentSize.oldPrice ? `$${(currentSize.oldPrice * activeModalQty).toLocaleString('es-AR')}` : '';
+
+            const sizesContainer = document.getElementById('modalSizesContainer');
+            sizesContainer.innerHTML = activeModalProduct.sizes.map((sz, idx) => `
+                <button onclick="changeProductSize(${activeModalProduct.id}, ${idx}); updateModalPriceAndSizes();" class="px-3 py-1.5 rounded-xl text-xs font-bold border ${idx === activeModalProduct.currentSizeIdx ? 'bg-bekim-violet text-white border-bekim-violet shadow' : 'bg-white text-gray-700 border-gray-300 hover:bg-pink-50'} transition">
+                    ${sz.label}
+                </button>
+            `).join('');
+
+            // Bind Actions
+            document.getElementById('modalAddToCartBtn').onclick = () => {
+                addToCart(activeModalProduct.id, activeModalQty);
+                closeProductModal();
+            };
+
+            document.getElementById('modalBuyWhatsappBtn').onclick = () => {
+                const sizeLabel = currentSize.label;
+                const total = currentSize.price * activeModalQty;
+                const msg = encodeURIComponent(`Hola Minerva Capilar! 👋 Quisiera comprar directamente:\n• ${activeModalProduct.name} (${sizeLabel}) x${activeModalQty} - $${total.toLocaleString('es-AR')}`);
+                window.open(`https://wa.me/5491112345678?text=${msg}`, '_blank');
+            };
+        }
+
+        function adjustModalQty(delta) {
+            activeModalQty += delta;
+            if (activeModalQty < 1) activeModalQty = 1;
+            document.getElementById('modalQtyVal').innerText = activeModalQty;
+            updateModalPriceAndSizes();
+        }
+
+        function switchModalTab(tabKey) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.modal-tab-btn').forEach(btn => {
+                btn.className = "modal-tab-btn pb-2 text-gray-400 border-b-2 border-transparent hover:text-bekim-pink";
+            });
+
+            if (tabKey === 'usage') {
+                document.getElementById('tabContentUsage').classList.remove('hidden');
+                document.getElementById('tabBtnUsage').className = "modal-tab-btn pb-2 text-bekim-pink border-b-2 border-bekim-pink font-bold";
+            } else if (tabKey === 'ingredients') {
+                document.getElementById('tabContentIngredients').classList.remove('hidden');
+                document.getElementById('tabBtnIngredients').className = "modal-tab-btn pb-2 text-bekim-pink border-b-2 border-bekim-pink font-bold";
+            } else if (tabKey === 'results') {
+                document.getElementById('tabContentResults').classList.remove('hidden');
+                document.getElementById('tabBtnResults').className = "modal-tab-btn pb-2 text-bekim-pink border-b-2 border-bekim-pink font-bold";
+            }
+        }
+
+        function closeProductModal() {
+            document.getElementById('productDetailModal').classList.add('hidden');
+        }
+
+        /* ----------------------------------------------------
+           FILTERING & SEARCHING
+        ---------------------------------------------------- */
+        function filterCategory(cat) {
+            activeCategory = cat;
+            renderProducts(filterData());
+        }
+
+        function filterByHairType(type) {
+            activeHairType = type;
+            
+            document.querySelectorAll('.hair-type-btn').forEach(btn => {
+                if ((type === 'all' && btn.innerText === 'Todos') || btn.innerText.includes(type)) {
+                    btn.className = "hair-type-btn text-xs font-semibold px-3.5 py-1.5 rounded-full bg-bekim-violet text-white whitespace-nowrap transition";
+                } else {
+                    btn.className = "hair-type-btn text-xs font-semibold px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-pink-50 hover:text-bekim-pink whitespace-nowrap transition";
+                }
+            });
+
+            renderProducts(filterData());
+        }
+
+        function filterData() {
+            return products.filter(p => {
+                const matchCategory = (activeCategory === 'all') || p.category.toLowerCase().includes(activeCategory.toLowerCase());
+                const matchHair = (activeHairType === 'all') || p.hairType.toLowerCase().includes(activeHairType.toLowerCase());
+                return matchCategory && matchHair;
+            });
+        }
+
+        function handleSearch(query) {
+            const q = query.toLowerCase().trim();
+            if (q === '') {
+                renderProducts(filterData());
+                return;
+            }
+            const matched = products.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+            renderProducts(matched);
+        }
+
+        function sortProducts(criteria) {
+            let sorted = [...filterData()];
+            if (criteria === 'price-low') {
+                sorted.sort((a, b) => a.sizes[a.currentSizeIdx].price - b.sizes[b.currentSizeIdx].price);
+            } else if (criteria === 'price-high') {
+                sorted.sort((a, b) => b.sizes[b.currentSizeIdx].price - a.sizes[a.currentSizeIdx].price);
+            } else if (criteria === 'name') {
+                sorted.sort((a, b) => a.name.localeCompare(b.name));
+            }
+            renderProducts(sorted);
+        }
+
+        /* ----------------------------------------------------
+           CART MANAGEMENT
+        ---------------------------------------------------- */
+        function addToCart(productId, quantity = 1) {
+            const product = products.find(p => p.id === productId);
+            const currentSize = product.sizes[product.currentSizeIdx];
+
+            const cartKey = `${product.id}-${currentSize.label}`;
+            const existing = cart.find(item => item.key === cartKey);
+
+            if (existing) {
+                existing.qty += quantity;
+            } else {
+                cart.push({
+                    key: cartKey,
+                    id: product.id,
+                    name: product.name,
+                    size: currentSize.label,
+                    price: currentSize.price,
+                    image: product.image,
+                    qty: quantity
+                });
+            }
+
+            showToast(`¡Añadido! ${product.name} (${currentSize.label})`);
+            updateCartUI();
+            toggleCartDrawer(true);
+        }
+
+        function updateCartQuantity(key, delta) {
+            const item = cart.find(i => i.key === key);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.key !== key);
+                }
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(key) {
+            cart = cart.filter(i => i.key !== key);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartCount = document.getElementById('cartCount');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartTotalHeader = document.getElementById('cartTotalHeader');
+            const shippingProgressBar = document.getElementById('shippingProgressBar');
+            const shippingProgressText = document.getElementById('shippingProgressText');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            cartCount.innerText = totalItems;
+            cartTotalHeader.innerText = `$${subtotal.toLocaleString('es-AR')}`;
+            cartSubtotal.innerText = `$${subtotal.toLocaleString('es-AR')}`;
+            cartTotal.innerText = `$${subtotal.toLocaleString('es-AR')}`;
+
+            // Free Shipping Calculator ($45.000 Target)
+            const shippingTarget = 45000;
+            if (subtotal >= shippingTarget) {
+                shippingProgressBar.style.width = '100%';
+                shippingProgressText.innerHTML = `<span class="text-green-600 font-bold"><i class="fa-solid fa-circle-check"></i> ¡Tenés ENVÍO GRATIS asegurado!</span>`;
+            } else {
+                const percent = Math.min((subtotal / shippingTarget) * 100, 100);
+                const remaining = shippingTarget - subtotal;
+                shippingProgressBar.style.width = `${percent}%`;
+                shippingProgressText.innerText = `¡Te faltan $${remaining.toLocaleString('es-AR')} para Envío Gratis!`;
+            }
+
+            // Render Cart Items List
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center p-8 text-gray-400">
+                        <i class="fa-solid fa-bag-shopping text-5xl mb-3 text-pink-200"></i>
+                        <p class="font-bold text-gray-700">Tu carrito está vacío</p>
+                        <p class="text-xs text-gray-400 mt-1">Explorá nuestro catálogo y seleccioná tus productos preferidos.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-2xl border border-gray-100">
+                    <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-contain bg-white rounded-xl p-1 shadow-sm">
+                    <div class="flex-1">
+                        <h4 class="text-xs font-bold text-gray-800 line-clamp-1">${item.name}</h4>
+                        <span class="text-[10px] text-bekim-magenta font-semibold block">Formato: ${item.size}</span>
+                        <span class="text-xs font-extrabold text-bekim-pink block mt-0.5">$${(item.price * item.qty).toLocaleString('es-AR')}</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-white border border-gray-200 rounded-lg p-1">
+                        <button onclick="updateCartQuantity('${item.key}', -1)" class="w-5 h-5 text-gray-500 hover:bg-gray-100 rounded flex items-center justify-center font-bold text-xs">-</button>
+                        <span class="text-xs font-bold px-1">${item.qty}</span>
+                        <button onclick="updateCartQuantity('${item.key}', 1)" class="w-5 h-5 text-gray-500 hover:bg-gray-100 rounded flex items-center justify-center font-bold text-xs">+</button>
+                    </div>
+                    <button onclick="removeFromCart('${item.key}')" class="text-gray-300 hover:text-red-500 p-1">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function toggleCartDrawer(forceOpen = false) {
+            const drawer = document.getElementById('cartDrawer');
+            const panel = document.getElementById('cartPanel');
+
+            if (forceOpen || drawer.classList.contains('pointer-events-none')) {
+                drawer.classList.remove('pointer-events-none', 'opacity-0');
+                panel.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.add('pointer-events-none', 'opacity-0');
+                panel.classList.add('translate-x-full');
+            }
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert("El carrito está vacío.");
+                return;
+            }
+
+            let msg = "Hola Minerva Capilar! 👋 Quisiera realizar el siguiente pedido:\n\n";
+            cart.forEach(item => {
+                msg += `• ${item.name} (${item.size}) x${item.qty} - $${(item.price * item.qty).toLocaleString('es-AR')}\n`;
+            });
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            msg += `\n*Total a pagar:* $${total.toLocaleString('es-AR')}\n\nQuedo a la espera para coordinar el pago y envío. ¡Muchas gracias!`;
+
+            window.open(`https://wa.me/5491112345678?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        /* ----------------------------------------------------
+           TOAST NOTIFICATIONS & AUXILIARY MODALS
+        ---------------------------------------------------- */
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = "toast-enter bg-bekim-violet text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 border border-bekim-pink/40 pointer-events-auto";
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-bekim-pink text-base"></i> ${message}`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        function openWholesaleModal() {
+            document.getElementById('wholesaleModal').classList.remove('hidden');
+        }
+
+        function closeWholesaleModal() {
+            document.getElementById('wholesaleModal').classList.add('hidden');
+        }
+
+        function handleWholesaleSubmit(e) {
+            e.preventDefault();
+            alert("¡Solicitud enviada con éxito! Un asesor mayorista te contactará a la brevedad.");
+            closeWholesaleModal();
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const panel = document.getElementById('mobileMenuPanel');
+
+            if (menu.classList.contains('pointer-events-none')) {
+                menu.classList.remove('pointer-events-none', 'opacity-0');
+                panel.classList.remove('-translate-x-full');
+            } else {
+                menu.classList.add('pointer-events-none', 'opacity-0');
+                panel.classList.add('-translate-x-full');
+            }
+        }
+    </script>
+</body>
+</html>
