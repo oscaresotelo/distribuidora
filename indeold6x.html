@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minerva Capilar | Cosmética Profesional</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2d0b3f;
+            --primary-light: #4a1565;
+            --accent: #e20074;
+            --accent-hover: #c10063;
+            --secondary: #8b1e84;
+            --bg-light: #fdfbfd;
+            --card-bg: #ffffff;
+            --text-dark: #1f1a24;
+            --text-muted: #6e6575;
+            --border-color: #f0e6f2;
+            --gold: #d4af37;
+            --shadow-sm: 0 4px 12px rgba(45, 11, 63, 0.05);
+            --shadow-md: 0 8px 24px rgba(45, 11, 63, 0.1);
+            --shadow-lg: 0 16px 32px rgba(45, 11, 63, 0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* TOP BAR ANNOUNCEMENT */
+        .top-bar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(226, 0, 116, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 450px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 18px 10px 42px;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            background-color: #f9f6fa;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(226, 0, 116, 0.1);
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+            position: relative;
+            padding: 6px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover {
+            color: var(--accent);
+            background-color: #f8f0f6;
+        }
+
+        .badge {
+            position: absolute;
+            top: 2px;
+            right: 0px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff;
+        }
+
+        /* NAVIGATION BAR */
+        nav.main-nav {
+            background-color: var(--primary);
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            max-width: 1280px;
+            width: 100%;
+            padding: 0 20px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-links li a {
+            display: block;
+            padding: 12px 18px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-links li a:hover, .nav-links li a.active {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-bottom-color: var(--accent);
+            color: #fff;
+        }
+
+        /* TOUCH-FRIENDLY SWIPEABLE HERO CAROUSEL */
+        .hero-carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 1280px;
+            margin: 20px auto 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            touch-action: pan-y; /* Crucial para scroll vertical fluido y swipe horizontal sin conflicto */
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+            cursor: grab;
+        }
+
+        .carousel-track:active {
+            cursor: grabbing;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            min-height: 380px;
+            padding: 40px 60px;
+            color: white;
+            user-select: none;
+        }
+
+        .slide-content {
+            max-width: 550px;
+            z-index: 2;
+        }
+
+        .slide-tag {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .slide-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            line-height: 1.15;
+            margin-bottom: 15px;
+        }
+
+        .slide-desc {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(226, 0, 116, 0.4);
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(226, 0, 116, 0.6);
+            background: linear-gradient(135deg, var(--accent-hover), var(--primary-light));
+        }
+
+        .slide-img-wrapper {
+            position: absolute;
+            right: 50px;
+            bottom: -20px;
+            height: 110%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .slide-img-wrapper img {
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        /* Carousel Navigation Controls */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            background-color: rgba(255, 255, 255, 0.85);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .carousel-arrow:hover {
+            background-color: #fff;
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow.prev { left: 15px; }
+        .carousel-arrow.next { right: 15px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            width: 28px;
+            border-radius: 10px;
+            background-color: var(--accent);
+        }
+
+        /* CATEGORIES BAR */
+        .categories-section {
+            max-width: 1280px;
+            margin: 35px auto 10px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+            margin-top: 5px;
+            border-radius: 2px;
+        }
+
+        .category-pills {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+
+        .category-pills::-webkit-scrollbar {
+            display: none;
+        }
+
+        .pill-btn {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pill-btn i {
+            color: var(--secondary);
+        }
+
+        .pill-btn:hover, .pill-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .pill-btn:hover i, .pill-btn.active i {
+            color: var(--accent);
+        }
+
+        /* PRODUCTS GRID SECTION */
+        .products-section {
+            max-width: 1280px;
+            margin: 20px auto 50px auto;
+            padding: 0 20px;
+            scroll-margin-top: 100px; /* Asegura espacio visual al hacer auto-scroll */
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(226, 0, 116, 0.2);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+
+        .product-badge.gold {
+            background: linear-gradient(135deg, #d4af37, #aa820a);
+        }
+
+        .product-img-box {
+            position: relative;
+            padding-top: 100%; /* 1:1 Aspect Ratio */
+            background-color: #faf8fc;
+            overflow: hidden;
+        }
+
+        .product-img-box img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img-box img {
+            transform: scale(1.06);
+        }
+
+        .quick-view-btn {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            background-color: rgba(45, 11, 63, 0.9);
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .product-card:hover .quick-view-btn {
+            bottom: 0;
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-category {
+            font-size: 0.72rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .product-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--gold);
+            font-size: 0.75rem;
+            margin-bottom: 12px;
+        }
+
+        .product-rating span {
+            color: var(--text-muted);
+            margin-left: 4px;
+        }
+
+        .product-foot {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .product-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .old-price {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .current-price {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .add-cart-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: #f3ebf5;
+            color: var(--primary);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-cart-btn:hover {
+            background-color: var(--accent);
+            color: white;
+            transform: scale(1.08);
+        }
+
+        /* WHOLESALE BANNER */
+        .wholesale-section {
+            max-width: 1280px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .wholesale-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #150320 100%);
+            border-radius: 16px;
+            padding: 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wholesale-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(226, 0, 116, 0.15);
+            border-radius: 50%;
+            blur: 40px;
+        }
+
+        .wholesale-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .wholesale-info p {
+            opacity: 0.85;
+            font-size: 0.95rem;
+            max-width: 600px;
+        }
+
+        /* QUICK VIEW MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 3, 22, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 850px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transform: translateY(20px);
+            transition: var(--transition);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #f2eaf4;
+            border: none;
+            color: var(--primary);
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow-y: auto;
+        }
+
+        .modal-img-col {
+            background-color: #fbf9fc;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-img-col img {
+            max-width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+        }
+
+        .modal-details-col {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .variant-selector {
+            margin: 15px 0;
+        }
+
+        .variant-selector label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .variant-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .variant-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background-color: #fff;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .variant-btn.active {
+            border-color: var(--accent);
+            background-color: rgba(226, 0, 116, 0.05);
+            color: var(--accent);
+        }
+
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-top: 15px;
+            gap: 15px;
+        }
+
+        .tab-btn {
+            border: none;
+            background: none;
+            padding: 8px 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .tab-content {
+            padding: 12px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            min-height: 80px;
+        }
+
+        /* CART DRAWER SLIDE-OVER */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: var(--shadow-lg);
+            z-index: 2100;
+            transition: right 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .cart-item img {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 8px;
+            background-color: #f7f3f8;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .cart-item-variant {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2px 8px;
+            width: max-content;
+            margin-top: 5px;
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: bold;
+            cursor: pointer;
+            padding: 2px 6px;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: #faf8fc;
+        }
+
+        .free-shipping-bar {
+            margin-bottom: 15px;
+        }
+
+        .shipping-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-line {
+            width: 100%;
+            height: 6px;
+            background-color: #e6dee8;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 50px 0 20px 0;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent);
+            margin-top: 6px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: none;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 40px auto 0 auto;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* MOBILE RESPONSIVE MEDIA QUERIES */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-bar {
+                display: none; /* Se oculta barra fija y se activa ícono de búsqueda en móvil */
+            }
+            .slide {
+                padding: 30px 20px;
+                min-height: 320px;
+            }
+            .slide-title {
+                font-size: 1.7rem;
+            }
+            .slide-img-wrapper {
+                opacity: 0.25;
+                right: -30px;
+            }
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+            .wholesale-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .carousel-arrow {
+                display: none; /* Ocultar flechas en móvil para dar prioridad al gesto táctil */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas muy pequeñas */
+            }
+            .product-info {
+                padding: 10px;
+            }
+            .product-title {
+                font-size: 0.85rem;
+            }
+            .current-price {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        <i class="fa-solid fa-truck-fast"></i> ENVÍOS GRATIS A TODO EL PAÍS EN COMPRAS MAYORES A $45.000 | 3 Y 6 CUOTAS SIN INTERÉS
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">M</div>
+                <div class="logo-text">
+                    <span class="logo-brand">MINERVA</span>
+                    <span class="logo-subtitle">CAPILAR</span>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Buscar shampoo, máscara, tratamiento..." onkeyup="filterProductsBySearch()">
+            </div>
+
+            <div class="header-actions">
+                <button class="icon-btn" title="Mi Cuenta"><i class="fa-regular fa-user"></i></button>
+                <button class="icon-btn" title="Favoritos"><i class="fa-regular fa-heart"></i><span class="badge">0</span></button>
+                <button class="icon-btn" onclick="toggleCart()" title="Carrito de compras">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="#" class="active" onclick="filterCategory('all', this)">TODOS LOS PRODUCTOS</a></li>
+                <li><a href="#productos" onclick="filterCategory('shampoo', this)">SHAMPOOS</a></li>
+                <li><a href="#productos" onclick="filterCategory('mascara', this)">MÁSCARAS Y BAÑOS</a></li>
+                <li><a href="#productos" onclick="filterCategory('ampollas', this)">AMPOLLAS Y SERUMS</a></li>
+                <li><a href="#productos" onclick="filterCategory('tratamientos', this)">ALISADOS Y TRATAMIENTOS</a></li>
+                <li><a href="#mayorista" onclick="openWholesaleModal()">CANAL MAYORISTA</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- TOUCH-FRIENDLY HERO CAROUSEL -->
+    <div class="hero-carousel-container" id="heroCarousel">
+        <div class="carousel-track" id="carouselTrack">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <span class="slide-tag">Nave insignia</span>
+                    <h1 class="slide-title">Línea Keratina Repaparadora</h1>
+                    <p class="slide-desc">Restauración profunda de la fibra capilar expuesta a tratamientos químicos intensos.</p>
+                    <a href="#productos" onclick="filterCategory('mascara')" class="btn-primary">Ver Colección <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="slide-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80" alt="Minerva Keratina">
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide" style="background: linear-gradient(135deg, #4a1565 0%, #e20074 100%);">
+                <div class="slide-content">
+                    <span class="slide-tag">Especial Rubios</span>
+                    <h1 class="slide-title">Shampoo & Máscara Ácida</h1>
+                    <p class="slide-desc">Neutraliza tonos amarillentos y sella la cutícula tras la decoloración profesional.</p>
+                    <a href="#productos" onclick="filterCategory('shampoo')" class="btn-primary">Descubrir Ahora <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="slide-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=600&q=80" alt="Shampoo Ácido Minerva">
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide" style="background: linear-gradient(135deg, #1f1a24 0%, #8b1e84 100%);">
+                <div class="slide-content">
+                    <span class="slide-tag">Concentrado Activo</span>
+                    <h1 class="slide-title">Ampollas de Nutrición Flash</h1>
+                    <p class="slide-desc">Efecto inmediato en 3 minutos. Brillo espejo y docilidad desde la primera aplicación.</p>
+                    <a href="#productos" onclick="filterCategory('ampollas')" class="btn-primary">Comprar Ampollas <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="slide-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1608248597379-e0d5e68f7111?auto=format&fit=crop&w=600&q=80" alt="Ampollas Minerva">
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-arrow prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="carousel-arrow next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+
+        <div class="carousel-dots" id="carouselDots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+        </div>
+    </div>
+
+    <!-- CATEGORIES & FILTERS -->
+    <section class="categories-section">
+        <div class="section-header">
+            <h2 class="section-title">Categorías Destacadas</h2>
+        </div>
+        <div class="category-pills">
+            <button class="pill-btn active" onclick="filterCategory('all', this)"><i class="fa-solid fa-border-all"></i> Todos</button>
+            <button class="pill-btn" onclick="filterCategory('shampoo', this)"><i class="fa-solid fa-pump-soap"></i> Shampoos</button>
+            <button class="pill-btn" onclick="filterCategory('mascara', this)"><i class="fa-solid fa-jar"></i> Máscaras</button>
+            <button class="pill-btn" onclick="filterCategory('ampollas', this)"><i class="fa-solid fa-vial"></i> Ampollas</button>
+            <button class="pill-btn" onclick="filterCategory('tratamientos', this)"><i class="fa-solid fa-wand-magic-sparkles"></i> Alisados</button>
+        </div>
+    </section>
+
+    <!-- PRODUCTS GRID SECTION -->
+    <section class="products-section" id="productos">
+        <div class="products-grid" id="productsGrid">
+            <!-- Los productos se cargan dinámicamente vía JavaScript -->
+        </div>
+    </section>
+
+    <!-- WHOLESALE BANNER -->
+    <section class="wholesale-section" id="mayorista">
+        <div class="wholesale-card">
+            <div class="wholesale-info">
+                <h3>¿Tenés un Salón de Belleza o Distribuidora?</h3>
+                <p>Accedé a la lista de precios mayorista exclusiva para profesionales de la belleza con descuentos de hasta el 40% y atención personalizada.</p>
+            </div>
+            <button class="btn-primary" onclick="openWholesaleModal()" style="white-space: nowrap;">Solicitar Cuenta Mayorista <i class="fa-solid fa-user-tie"></i></button>
+        </div>
+    </section>
+
+    <!-- QUICK VIEW PRODUCT MODAL -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body" id="modalContent">
+                <!-- Carga dinámica del detalle de producto -->
+            </div>
+        </div>
+    </div>
+
+    <!-- WHOLESALE MODAL -->
+    <div class="modal-overlay" id="wholesaleModal">
+        <div class="modal-container" style="max-width: 500px; padding: 30px;">
+            <button class="modal-close" onclick="closeWholesaleModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 10px;">Solicitud Mayorista</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Completá el formulario para validar tu cuenta profesional.</p>
+            <form onsubmit="submitWholesale(event)" style="display: flex; flex-direction: column; gap: 12px;">
+                <input type="text" placeholder="Nombre completo / Razón Social" required style="padding: 10px; border: 1px solid var(--border-color); border-radius: 6px;">
+                <input type="tel" placeholder="WhatsApp de contacto" required style="padding: 10px; border: 1px solid var(--border-color); border-radius: 6px;">
+                <input type="email" placeholder="Correo electrónico" required style="padding: 10px; border: 1px solid var(--border-color); border-radius: 6px;">
+                <select style="padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-muted);">
+                    <option>Tipo de Negocio: Salón / Peluquería</option>
+                    <option>Distribuidora</option>
+                    <option>Revendedor Independiente</option>
+                </select>
+                <button type="submit" class="btn-primary" style="justify-content: center; margin-top: 10px;">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CART SLIDE-OVER DRAWER -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Mi Carrito</h3>
+            <button class="icon-btn" onclick="toggleCart()" style="color: white;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-body" id="cartItems">
+            <!-- Ítems agregados dinámicamente -->
+        </div>
+        <div class="cart-footer">
+            <div class="free-shipping-bar">
+                <div class="shipping-text">
+                    <span id="shippingStatus">Agregá productos para envío gratis</span>
+                    <span id="shippingRemaining">$45.000</span>
+                </div>
+                <div class="progress-line">
+                    <div class="progress-fill" id="shippingProgress"></div>
+                </div>
+            </div>
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span id="cartTotalAmount">$0</span>
+            </div>
+            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="checkoutWhatsApp()">Finalizar Pedido por WhatsApp <i class="fa-brands fa-whatsapp"></i></button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="logo-brand" style="color: white; margin-bottom: 12px;">MINERVA CAPILAR</div>
+                <p style="font-size: 0.85rem; opacity: 0.7; line-height: 1.6; margin-bottom: 20px;">
+                    Laboratorio especializado en cosmética e innovación capilar profesional. Desarrollamos fórmulas de alta performance para el cuidado y reconstrucción del cabello.
+                </p>
+                <div style="display: flex; gap: 15px; font-size: 1.2rem;">
+                    <a href="#" style="color: white;"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" style="color: white;"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#productos">Catálogo Completo</a></li>
+                    <li><a href="#mayorista">Ventas Mayoristas</a></li>
+                    <li><a href="#">Nosotros</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Líneas</h4>
+                <ul class="footer-links">
+                    <li><a href="#productos" onclick="filterCategory('mascara')">Keratina</a></li>
+                    <li><a href="#productos" onclick="filterCategory('shampoo')">Ácido Neutro</a></li>
+                    <li><a href="#productos" onclick="filterCategory('ampollas')">Nutrición Intensiva</a></li>
+                    <li><a href="#productos" onclick="filterCategory('tratamientos')">Alisados Pro</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Suscribite</h4>
+                <p style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 12px;">Recibí ofertas exclusivas y novedades de lanzamientos en tu email.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte a Minerva Capilar!');">
+                    <input type="email" placeholder="Tu correo electrónico" required>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Suscribirme</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Minerva Capilar - Todos los derechos reservados. San Miguel de Tucumán, Argentina.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LÓGICO E INTERACTIVO -->
+    <script>
+        // BASE DE DATOS DE PRODUCTOS DE MINERVA CAPILAR
+        const products = [
+            {
+                id: 1,
+                title: "Máscara Capilar Keratina Reparadora Intensa",
+                category: "mascara",
+                badge: "Más Vendido",
+                rating: 5,
+                reviews: 48,
+                price250: 8500,
+                price1000: 19500,
+                img: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80",
+                desc: "Tratamiento intensivo formulado con hidrolizado de keratina vegetal que reestructura profundamente los cabellos dañados por procesos químicos.",
+                usage: "Aplicar sobre cabello húmedo de medios a puntas. Dejar actuar 10 a 15 minutos con gorro térmico y enjuagar con abundante agua tibia.",
+                ingredients: "Aqua, Cetearyl Alcohol, Keratin Amino Acids, Argania Spinosa Kernel Oil, Cetrimonium Chloride, Fragrance."
+            },
+            {
+                id: 2,
+                title: "Shampoo Ácido Equilibrante de pH",
+                category: "shampoo",
+                badge: "Post-Deco",
+                rating: 5,
+                reviews: 32,
+                price250: 7200,
+                price1000: 16800,
+                img: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=600&q=80",
+                desc: "Shampoo de pH ácido (3.5 - 4.0) diseñado para cerrar la cutícula y sellar el color luego de decoloraciones, tinturas o alisados.",
+                usage: "Lavar suavemente sobre el cuero cabelludo con masajes circulares. Enjuagar y repetir la operación si es necesario.",
+                ingredients: "Aqua, Sodium Laureth Sulfate, Citric Acid, Glycol Distearate, Cocamidopropyl Betaine, Methylparaben."
+            },
+            {
+                id: 3,
+                title: "Ampollas de Nutrición Extrema Cauterizadora",
+                category: "ampollas",
+                badge: "Efecto Flash",
+                rating: 4.9,
+                reviews: 64,
+                price250: 12000, // Pack x 6
+                price1000: 22000, // Pack x 12
+                img: "https://images.unsplash.com/photo-1608248597379-e0d5e68f7111?auto=format&fit=crop&w=600&q=80",
+                desc: "Concentrado hidro-nutritivo de acción instantánea que devuelve el brillo espejo y elimina el frizz en tan solo 3 minutos.",
+                usage: "Mezclar el contenido de la ampolla con 3 partes de agua tibia hasta formar una crema homogénea. Aplicar, dejar 3 min y enjuagar.",
+                ingredients: "Alcohol Denat, Propylene Glycol, Myristyl Alcohol, Cetrimonium Chloride, Polyquaternium-11."
+            },
+            {
+                id: 4,
+                title: "Tratamiento Alisado Pro Térmico sin Formol",
+                category: "tratamientos",
+                badge: "Línea Profesional",
+                rating: 4.8,
+                reviews: 19,
+                price250: 14500,
+                price1000: 32000,
+                img: "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80",
+                desc: "Alisado progresivo termosellable a base de ácidos orgánicos y aceites esenciales. Otorga un lacio natural con movimiento y brillo.",
+                usage: "Aplicar sobre cabello limpio y seco, dejar actuar 45 min, secar 100% con secador y pasar planchita a 230°C de 10 a 15 veces por mecha.",
+                ingredients: "Glyoxylic Acid, Argan Oil, Macadamia Oil, Hydrolyzed Collagen, Silk Protein."
+            },
+            {
+                id: 5,
+                title: "Baño de Crema Argán & Nutrición Proteica",
+                category: "mascara",
+                badge: "Nuevo",
+                rating: 4.7,
+                reviews: 15,
+                price250: 8100,
+                price1000: 18900,
+                img: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80",
+                desc: "Fórmula enriquecida con aceite puro de Argán de Marruecos que aporta sedosidad extrema a cabellos secos y porosos.",
+                usage: "Usar semanalmente después del shampoo. Dejar actuar 5 minutos y enjuagar bien.",
+                ingredients: "Aqua, Argania Spinosa Oil, Glycerin, Cetearyl Alcohol, Panthenol."
+            },
+            {
+                id: 6,
+                title: "Shampoo Neutro de Limpieza Profunda",
+                category: "shampoo",
+                badge: "Pre-Tratamiento",
+                rating: 4.9,
+                reviews: 28,
+                price250: 6800,
+                price1000: 15500,
+                img: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=600&q=80",
+                desc: "Prepara la fibra capilar abriendo las cutículas para la máxima absorción de alisados, ampolla o baños de crema.",
+                usage: "Aplicar sobre cabello húmedo, masajear enérgicamente y dejar actuar 2 minutos antes de enjuagar.",
+                ingredients: "Aqua, Sodium Lauryl Sulfate, Cocamide DEA, Sodium Chloride, Fragrance."
+            }
+        ];
+
+        let cart = [];
+
+        // RENDERIZAR PRODUCTOS
+        function renderProducts(items) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => openModal(product.id);
+
+                card.innerHTML = `
+                    <span class="product-badge">${product.badge}</span>
+                    <div class="product-img-box">
+                        <img src="${product.img}" alt="${product.title}">
+                        <div class="quick-view-btn"><i class="fa-solid fa-eye"></i> Vista Rápida</div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">${product.category}</span>
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-rating">
+                            ${'<i class="fa-solid fa-star"></i>'.repeat(Math.floor(product.rating))}
+                            <span>(${product.reviews})</span>
+                        </div>
+                        <div class="product-foot">
+                            <div class="product-price">
+                                <span class="old-price">$${Math.round(product.price250 * 1.25).toLocaleString()}</span>
+                                <span class="current-price">$${product.price250.toLocaleString()}</span>
+                            </div>
+                            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCartDirect(${product.id})" title="Agregar al carrito">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // FILTRADO POR CATEGORÍA CON AUTO-SCROLL MEJORADO
+        function filterCategory(category, element = null) {
+            if (element) {
+                document.querySelectorAll('.pill-btn, .nav-links a').forEach(btn => btn.classList.remove('active'));
+                element.classList.add('active');
+            }
+
+            if (category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+
+            // AUTO-SCROLL DIRECTO A LA GRILLA DE PRODUCTOS
+            const productsSection = document.getElementById('productos');
+            if (productsSection) {
+                productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // FILTRO DE BÚSQUEDA PREDICTIVA
+        function filterProductsBySearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        // SWIPEABLE HERO CAROUSEL LOGIC WITH TOUCH EVENTS
+        let currentSlide = 0;
+        const totalSlides = 3;
+        const track = document.getElementById('carouselTrack');
+        const dots = document.querySelectorAll('.dot');
+        let autoPlayTimer;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            updateCarousel();
+            restartAutoPlay();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+            restartAutoPlay();
+        }
+
+        function startAutoPlay() {
+            autoPlayTimer = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+            }, 4000);
+        }
+
+        function restartAutoPlay() {
+            clearInterval(autoPlayTimer);
+            startAutoPlay();
+        }
+
+        // DETECCIÓN TÁCTIL MEJORADA (TOUCH SWIPE FOR MOBILE)
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const carouselContainer = document.getElementById('heroCarousel');
+
+        carouselContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 40; // Sensibilidad de deslizamiento
+            if (touchEndX < touchStartX - swipeThreshold) {
+                moveSlide(1); // Swipe hacia la izquierda -> Siguiente
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                moveSlide(-1); // Swipe hacia la derecha -> Anterior
+            }
+        }
+
+        // MODAL DE DETALLE DE PRODUCTO
+        function openModal(id) {
+            const product = products.find(p => p.id === id);
+            const modalContent = document.getElementById('modalContent');
+
+            modalContent.innerHTML = `
+                <div class="modal-img-col">
+                    <img src="${product.img}" alt="${product.title}">
+                </div>
+                <div class="modal-details-col">
+                    <span class="product-category">${product.category}</span>
+                    <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 10px;">${product.title}</h2>
+                    <div class="current-price" id="modalPrice" style="font-size: 1.5rem; margin-bottom: 15px;">$${product.price250.toLocaleString()}</div>
+                    
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">${product.desc}</p>
+
+                    <div class="variant-selector">
+                        <label>Seleccionar Presentación:</label>
+                        <div class="variant-options">
+                            <button class="variant-btn active" id="btn250" onclick="selectVariant(250, ${product.price250})">250 ml / cm³</button>
+                            <button class="variant-btn" id="btn1000" onclick="selectVariant(1000, ${product.price1000})">1000 ml (1 Litro)</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-tabs">
+                        <button class="tab-btn active" onclick="switchTab('usage', this)">Modo de Uso</button>
+                        <button class="tab-btn" onclick="switchTab('ingredients', this)">Ingredientes</button>
+                    </div>
+
+                    <div class="tab-content" id="tabContent">
+                        ${product.usage}
+                    </div>
+
+                    <button class="btn-primary" style="margin-top: 20px; justify-content: center;" onclick="addToCartFromModal(${product.id})">
+                        <i class="fa-solid fa-bag-shopping"></i> Agregar al Carrito
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('productModal').classList.add('active');
+        }
+
+        let selectedVolume = 250;
+        let selectedPrice = 0;
+
+        function selectVariant(vol, price) {
+            selectedVolume = vol;
+            selectedPrice = price;
+            document.getElementById('modalPrice').innerText = `$${price.toLocaleString()}`;
+            
+            document.getElementById('btn250').classList.toggle('active', vol === 250);
+            document.getElementById('btn1000').classList.toggle('active', vol === 1000);
+        }
+
+        function switchTab(tabName, element) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            
+            const activeProduct = products.find(p => p.id === currentModalProductId);
+            if (activeProduct) {
+                document.getElementById('tabContent').innerText = tabName === 'usage' ? activeProduct.usage : activeProduct.ingredients;
+            }
+        }
+
+        let currentModalProductId = null;
+        const originalOpenModal = openModal;
+        openModal = function(id) {
+            currentModalProductId = id;
+            const product = products.find(p => p.id === id);
+            selectedVolume = 250;
+            selectedPrice = product.price250;
+            originalOpenModal(id);
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+        }
+
+        // LÓGICA DEL CARRITO DE COMPRAS
+        function toggleCart() {
+            document.getElementById('cartDrawer').classList.toggle('open');
+        }
+
+        function addToCartDirect(id) {
+            const product = products.find(p => p.id === id);
+            addToCart(product, 250, product.price250);
+        }
+
+        function addToCartFromModal(id) {
+            const product = products.find(p => p.id === id);
+            addToCart(product, selectedVolume, selectedPrice);
+            closeModal();
+        }
+
+        function addToCart(product, volume, price) {
+            const cartItem = cart.find(item => item.id === product.id && item.volume === volume);
+            if (cartItem) {
+                cartItem.qty += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    title: product.title,
+                    img: product.img,
+                    volume: volume,
+                    price: price,
+                    qty: 1
+                });
+            }
+            updateCart();
+            toggleCart();
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+            
+            let total = 0;
+            let count = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                count += item.qty;
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <img src="${item.img}" alt="${item.title}">
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-variant">Presentación: ${item.volume} ml</div>
+                        <div class="cart-item-price">$${(item.price * item.qty).toLocaleString()}</div>
+                        <div class="qty-control">
+                            <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemEl);
+            });
+
+            document.getElementById('cartCount').innerText = count;
+            document.getElementById('cartTotalAmount').innerText = `$${total.toLocaleString()}`;
+
+            // Barra de Envío Gratis ($45.000)
+            const target = 45000;
+            const progress = Math.min((total / target) * 100, 100);
+            document.getElementById('shippingProgress').style.width = `${progress}%`;
+
+            if (total >= target) {
+                document.getElementById('shippingStatus').innerText = '¡Felicidades! Tenés Envío GRATIS';
+                document.getElementById('shippingRemaining').innerText = '$0';
+            } else {
+                document.getElementById('shippingStatus').innerText = 'Falta para Envío Gratis:';
+                document.getElementById('shippingRemaining').innerText = `$${(target - total).toLocaleString()}`;
+            }
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('El carrito está vacío');
+                return;
+            }
+
+            let message = "¡Hola Minerva Capilar! Quisiera realizar el siguiente pedido:\n\n";
+            let total = 0;
+
+            cart.forEach(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                message += `• ${item.title} (${item.volume}ml) x${item.qty} - $${subtotal.toLocaleString()}\n`;
+            });
+
+            message += `\n*Total a Pagar:* $${total.toLocaleString()}`;
+            message += `\n\n¿Me indican los pasos para realizar el pago y acordar el envío?`;
+
+            const phone = "5493810000000"; // Número de WhatsApp configurado
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // MODAL MAYORISTA
+        function openWholesaleModal() {
+            document.getElementById('wholesaleModal').classList.add('active');
+        }
+
+        function closeWholesaleModal() {
+            document.getElementById('wholesaleModal').classList.remove('active');
+        }
+
+        function submitWholesale(e) {
+            e.preventDefault();
+            alert('¡Gracias! Un asesor de Minerva Capilar se pondrá en contacto a la brevedad para enviarle la lista de precios mayorista.');
+            closeWholesaleModal();
+        }
+
+        // INICIALIZACIÓN
+        window.onload = () => {
+            renderProducts(products);
+            startAutoPlay();
+        };
+    </script>
+</body>
+</html>
